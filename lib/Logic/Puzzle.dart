@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:sleumorphic/Data/Data.dart';
 import 'package:sleumorphic/Dialogs/StatsDialog.dart';
 import 'package:sleumorphic/Logic/PuzzleFunctions.dart';
-import 'package:sleumorphic/Widgets/Counter.dart';
 import 'package:sleumorphic/Widgets/Tile.dart';
 import 'package:tools/SaveLoadManager.dart';
 import 'package:tools/Startup.dart';
@@ -79,7 +78,6 @@ class Puzzle {
 
 		// Also make sure no tiles are currently coloured
 		tilesStateGroup.notifyAll(null);
-		counterGroup.notifyAll(null);
 		boardStateGroup.notifyAll(null);
 	}
 

@@ -33,32 +33,8 @@ class InstructionsDialogState extends State<InstructionsDialog> {
 
 		spans.add(
 			const TextSpan(
-				text: "Flutter 8 is a cross between a slide puzzle and a magic square puzzle. Your goal is to arrange the tiles in such a way that it forms a magic square. A magic square is a square where each row/column/diagonal of 3 tiles sum up to the same number. Note that every single possible answer has the empty space in the top middle like this:\n\n"),
+				text: "Sleumorphic is an experiment in applying a neumorphic UI to a slide puzzle so it plays around with depth a lot. One of the ways this is done is by having two slide puzzles. You can switch between them by clicking the empty square.\n\n"),
 		);
-		spans.add(const WidgetSpan(
-			child: Center(
-				child: SizedBox(height: 200, width: 200, child: Image(image: AssetImage("assets/SolvedBoard.png")))
-			),
-		));
-		spans.add(
-			const TextSpan(
-				text: "\n\nThis may sound difficult to solve but it is fairly easy once you know how. First you must calculate the 'magic sum' (the numbers the columns/rows/diagonal of 3 tiles sums up to). You could do this by brute forcing every single value. We know the magic sum must be greater than the highest tile value and lower than the highest and second highest tile values added together. Although a much easier way of doing this is adding up all the numbers and dividing by 3.\n\n"
-						"Next, as we know the empty space will always be in the top center we know that there must be at least 2 ways to sum up to the magic sum with only 2 pieces. We then just need to brute force which pieces go in these spots.\n\n"),
-		);
-		spans.add(const WidgetSpan(
-			child: Center(
-				child: SizedBox(height: 200, width: 200, child: Image(image: AssetImage("assets/SolvedBoardHighlighted.png")))
-			),
-		));
-		spans.add(
-			const TextSpan(
-				text: "\n\nAlso note you may have to flip your solution in the Y axis in order to actually solve the slide puzzle.\n\n"),
-		);
-		spans.add(const WidgetSpan(
-			child: Center(
-				child: SizedBox(height: 200, width: 200, child: Image(image: AssetImage("assets/BackwardsBoard.png")))
-			),
-		));
 		spans.add(
 			const TextSpan(
 				text: "\n\nAnd if you don't know how to solve a slide puzzle "),

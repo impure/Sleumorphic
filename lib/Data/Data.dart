@@ -1,6 +1,5 @@
 
 import 'package:sleumorphic/Logic/Puzzle.dart';
-import 'package:sleumorphic/Widgets/Counter.dart';
 import 'package:state_groups/state_groups.dart';
 
 late Puzzle puzzle;
@@ -14,7 +13,6 @@ void notifyGame() {
 	boardStateGroup.notifyAll();
 	statDisplayStateGroup.notifyAll();
 	bottomButtonStateGroup.notifyAll();
-	counterGroup.notifyAll(null);
 }
 
 StateGroup<void> boardStateGroup = StateGroup<void>();

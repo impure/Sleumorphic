@@ -8,7 +8,6 @@ import 'package:sleumorphic/Data/Data.dart';
 import 'package:sleumorphic/Dialogs/InstructionsDialog.dart';
 import 'package:sleumorphic/Dialogs/SettingsDialog.dart';
 import 'package:sleumorphic/Widgets/BoardDisplay.dart';
-import 'package:sleumorphic/Widgets/Counter.dart';
 import 'package:tools/BasicExtensions.dart';
 import 'package:tools/Startup.dart';
 
@@ -64,10 +63,6 @@ class HomePageState extends State<HomePage> {
 			padding: EdgeInsets.only(left: gridSize * 0.1, top: gridSize * 0.05, bottom: gridSize * 0.05, right: gridSize * 0.05),
 			decoration: BoxDecoration(
 				borderRadius: BorderRadius.all(Radius.circular(gridSize / 5)),
-				image: const DecorationImage(
-					fit: BoxFit.cover, // I don't know what this does but we need it
-					image: AssetImage("assets/board.png")
-				),
 				boxShadow: <BoxShadow>[
 					BoxShadow(
 						color: Colors.black38,
@@ -161,56 +156,6 @@ class HomePageState extends State<HomePage> {
 										child: BoardDisplay(gridSize),
 									),
 								],
-							),
-							Column(
-								mainAxisSize: MainAxisSize.min,
-								children: <Widget>[
-									Counter(
-										gridSize / 3,
-										() => (puzzle.puzzlePieces[6] ?? 0) + (puzzle.puzzlePieces[4] ?? 0) + (puzzle.puzzlePieces[2] ?? 0),
-										const AssetImage("assets/counter1.png"),
-									),
-									Counter(
-										gridSize / 3,
-										() => (puzzle.puzzlePieces[0] ?? 0) + (puzzle.puzzlePieces[1] ?? 0) + (puzzle.puzzlePieces[2] ?? 0),
-										const AssetImage("assets/counter2.png"),
-									),
-									Counter(
-										gridSize / 3,
-										() => (puzzle.puzzlePieces[3] ?? 0) + (puzzle.puzzlePieces[4] ?? 0) + (puzzle.puzzlePieces[5] ?? 0),
-										const AssetImage("assets/counter3.png"),
-									),
-									Counter(
-										gridSize / 3,
-										() => (puzzle.puzzlePieces[6] ?? 0) + (puzzle.puzzlePieces[7] ?? 0) + (puzzle.puzzlePieces[8] ?? 0),
-										const AssetImage("assets/counter4.png"),
-									),
-								],
-							),
-						],
-					),
-					Row(
-						mainAxisSize: MainAxisSize.min,
-						children: <Widget>[
-							Counter(
-								gridSize / 3,
-								() => (puzzle.puzzlePieces[0] ?? 0) + (puzzle.puzzlePieces[3] ?? 0) + (puzzle.puzzlePieces[6] ?? 0),
-								const AssetImage("assets/counter2.png"),
-							),
-							Counter(
-								gridSize / 3,
-								() => (puzzle.puzzlePieces[1] ?? 0) + (puzzle.puzzlePieces[4] ?? 0) + (puzzle.puzzlePieces[7] ?? 0),
-								const AssetImage("assets/counter3.png"),
-							),
-							Counter(
-								gridSize / 3,
-								() => (puzzle.puzzlePieces[2] ?? 0) + (puzzle.puzzlePieces[5] ?? 0) + (puzzle.puzzlePieces[8] ?? 0),
-								const AssetImage("assets/counter4.png"),
-							),
-							Counter(
-								gridSize / 3,
-								() => (puzzle.puzzlePieces[0] ?? 0) + (puzzle.puzzlePieces[4] ?? 0) + (puzzle.puzzlePieces[8] ?? 0),
-								const AssetImage("assets/counter1.png"),
 							),
 						],
 					),

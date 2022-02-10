@@ -118,7 +118,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: c60c3d743ec9e7b346f8cb3a475aa2e4193541e1
+      resolved-ref: "264055d5526ad21f58e5a3cc8267c735de8ba126"
       url: "https://gitlab.com/azuredown/dart-lints.git"
     source: git
     version: "1.0.0+1"
@@ -647,7 +647,7 @@ packages:
       name: url_launcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.0.19"
+    version: "6.0.20"
   url_launcher_android:
     dependency: transitive
     description:
@@ -668,14 +668,14 @@ packages:
       name: url_launcher_linux
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.3"
+    version: "3.0.0"
   url_launcher_macos:
     dependency: transitive
     description:
       name: url_launcher_macos
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.3"
+    version: "3.0.0"
   url_launcher_platform_interface:
     dependency: transitive
     description:
@@ -696,7 +696,7 @@ packages:
       name: url_launcher_windows
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "3.0.0"
   vector_math:
     dependency: transitive
     description:

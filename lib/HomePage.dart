@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sleumorphic/Data/Data.dart';
 import 'package:sleumorphic/Dialogs/InstructionsDialog.dart';
 import 'package:sleumorphic/Dialogs/SettingsDialog.dart';
 import 'package:sleumorphic/Widgets/BoardDisplay.dart';

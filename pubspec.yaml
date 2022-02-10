@@ -29,6 +29,23 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  auto_size_text: ^3.0.0
+  flutter_neumorphic: ^3.2.0
+  firebase_analytics: ^9.0.0
+  dart_lints:
+    git:
+      url: https://gitlab.com/azuredown/dart-lints.git
+      ref: main
+  state_groups: ^0.1.0
+  tools:
+    git:
+      url: https://gitlab.com/azuredown/flutter-tools.git
+      ref: no_ads_firebase
+  tuple: any
+  fluttertoast: ^8.0.0
+  shared_preferences: ^2.0.0
+  social_share: ^2.2.1
+  url_launcher: ^6.0.0
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -141,19 +141,7 @@ class HomePageState extends State<HomePage> {
 											),
 										),
 									),
-									Container(
-										decoration: BoxDecoration(
-											color: Colors.orange.withOpacity(0.2),
-											boxShadow: const <BoxShadow>[
-												BoxShadow(
-													color: Colors.black54,
-													blurRadius: 10,
-													blurStyle: BlurStyle.inner,
-												)
-											],
-										),
-										child: BoardDisplay(gridSize),
-									),
+									BoardDisplay(gridSize),
 								],
 							),
 						],

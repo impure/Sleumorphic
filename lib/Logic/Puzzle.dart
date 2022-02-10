@@ -47,8 +47,8 @@ List<List<int?>> magicSquares = <List<int?>>[
 	<int?>[17, null, 10, 2, 9, 16, 8, 18, 1],
 ];
 
-const int PUZZLE_WIDTH = 3;
-const int PUZZLE_HEIGHT = 3;
+const int PUZZLE_WIDTH = 4;
+const int PUZZLE_HEIGHT = 4;
 
 class Puzzle {
 
@@ -61,7 +61,7 @@ class Puzzle {
 
 		final Random rng = Random();
 
-		final List<int?> possibleSolution = magicSquares[rng.nextInt(magicSquares.length)];
+		final List<int?> possibleSolution = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, null, ];
 		puzzlePieces = possibleSolution.toList();
 
 		//print("The magic sum is: ${(possibleSolution[0] ?? 0) + (possibleSolution[1] ?? 0) + (possibleSolution[2] ?? 0)}");

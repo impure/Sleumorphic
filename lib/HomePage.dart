@@ -58,17 +58,10 @@ class HomePageState extends State<HomePage> {
 	}
 
 	Widget gameBoard(double gridSize) {
+		return BoardDisplay(gridSize);
+		/*
 		return Container(
 			padding: EdgeInsets.only(left: gridSize * 0.1, top: gridSize * 0.05, bottom: gridSize * 0.05, right: gridSize * 0.05),
-			decoration: BoxDecoration(
-				borderRadius: BorderRadius.all(Radius.circular(gridSize / 5)),
-				boxShadow: <BoxShadow>[
-					BoxShadow(
-						color: Colors.black38,
-						blurRadius: gridSize * 0.05,
-					),
-				],
-			),
 			child: Column(
 				crossAxisAlignment: CrossAxisAlignment.start,
 				mainAxisSize: MainAxisSize.min,
@@ -148,7 +141,7 @@ class HomePageState extends State<HomePage> {
 					),
 				],
 			),
-		);
+		);*/
 	}
 
 	void displayHelp() {

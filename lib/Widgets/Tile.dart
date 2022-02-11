@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:sleumorphic/Data/Data.dart';
 import 'package:sleumorphic/Dialogs/StatsDialog.dart';
 import 'package:sleumorphic/Logic/Puzzle.dart';
@@ -81,8 +82,14 @@ class TileState extends SyncState<Map<int, DIRECTION_HINT>, Tile> with SingleTic
 					child: SizedBox(
 						height: widget.height,
 						width: widget.width,
-						child: Material(
-							elevation: 3,
+						child: Neumorphic(
+							style: NeumorphicStyle(
+								shape: NeumorphicShape.convex,
+								boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
+								depth: 5,
+								lightSource: LightSource.topLeft,
+								color: Theme.of(context).canvasColor
+							),
 							child: InkWell(
 								hoverColor: Colors.black12,
 								child: SizedBox(

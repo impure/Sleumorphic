@@ -61,7 +61,7 @@ class Puzzle {
 
 		final Random rng = Random();
 
-		final List<int?> possibleSolution = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, null, ];
+		final List<int?> possibleSolution = <int?>[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, null, ];
 		puzzlePieces = possibleSolution.toList();
 
 		//print("The magic sum is: ${(possibleSolution[0] ?? 0) + (possibleSolution[1] ?? 0) + (possibleSolution[2] ?? 0)}");

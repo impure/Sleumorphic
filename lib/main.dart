@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
 	@override
 	Widget build(BuildContext context) {
 		return MaterialApp(
-			theme: ThemeData(),
+			theme: ThemeData().copyWith(scaffoldBackgroundColor: const Color(0xffBBBBBB)),
 			darkTheme: ThemeData.dark(),
 			home: const LoadingPage(),
 		);

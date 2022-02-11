@@ -8,6 +8,7 @@ import 'package:sleumorphic/Data/Data.dart';
 import 'package:sleumorphic/Dialogs/StatsDialog.dart';
 import 'package:sleumorphic/Logic/Puzzle.dart';
 import 'package:state_groups/state_groups.dart';
+import 'package:tools/BasicExtensions.dart';
 
 StateGroup<Map<int, DIRECTION_HINT>> tilesStateGroup = StateGroup<Map<int, DIRECTION_HINT>>();
 
@@ -74,6 +75,8 @@ class TileState extends SyncState<Map<int, DIRECTION_HINT>, Tile> with SingleTic
 	@override
 	Widget build(BuildContext context) {
 
+		final ThemeData themeData = Theme.of(context);
+
 		return AnimatedBuilder(
 			animation: _controller,
 			builder: (_, __) {
@@ -88,9 +91,9 @@ class TileState extends SyncState<Map<int, DIRECTION_HINT>, Tile> with SingleTic
 								boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
 								depth: 5,
 								lightSource: LightSource.topLeft,
-								color: Theme.of(context).canvasColor,
-								shadowDarkColor: Colors.black,
-								shadowLightColor: Colors.white70,
+								color: themeData.canvasColor,
+								shadowDarkColor: themeData.darkModeEnabled ? Colors.black : Colors.black54,
+								shadowLightColor: themeData.darkModeEnabled ? Colors.white70 : Colors.white,
 							),
 							child: GestureDetector(
 								behavior: HitTestBehavior.translucent,

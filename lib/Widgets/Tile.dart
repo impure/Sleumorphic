@@ -88,7 +88,9 @@ class TileState extends SyncState<Map<int, DIRECTION_HINT>, Tile> with SingleTic
 								boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
 								depth: 5,
 								lightSource: LightSource.topLeft,
-								color: Theme.of(context).canvasColor
+								color: Theme.of(context).canvasColor,
+								shadowDarkColor: Colors.black,
+								shadowLightColor: Colors.white70,
 							),
 							child: GestureDetector(
 								behavior: HitTestBehavior.translucent,

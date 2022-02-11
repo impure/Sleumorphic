@@ -118,7 +118,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "264055d5526ad21f58e5a3cc8267c735de8ba126"
+      resolved-ref: "031284c79401e0b9d3e4262e3a1d687412760354"
       url: "https://gitlab.com/azuredown/dart-lints.git"
     source: git
     version: "1.0.0+1"

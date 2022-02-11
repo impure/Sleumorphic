@@ -90,8 +90,8 @@ class TileState extends SyncState<Map<int, DIRECTION_HINT>, Tile> with SingleTic
 								lightSource: LightSource.topLeft,
 								color: Theme.of(context).canvasColor
 							),
-							child: InkWell(
-								hoverColor: Colors.black12,
+							child: GestureDetector(
+								behavior: HitTestBehavior.translucent,
 								child: SizedBox(
 									height: widget.height,
 									width: widget.width,

@@ -123,6 +123,9 @@ class TileState extends SyncState<Map<int, DIRECTION_HINT>, Tile> with SingleTic
 									),
 								),
 								onTap: () {
+									if (!widget.foreground) {
+										return;
+									}
 									if (puzzle.solved) {
 										showDialog(
 											context: context,

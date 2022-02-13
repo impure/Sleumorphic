@@ -13,12 +13,13 @@ import 'package:tools/BasicExtensions.dart';
 StateGroup<Map<int, DIRECTION_HINT>> tilesStateGroup = StateGroup<Map<int, DIRECTION_HINT>>();
 
 class Tile extends StatefulWidget {
-	const Tile(this.num, this.width, this.height, this.offset, {Key? key}) : super(key: key);
+	const Tile(this.num, this.width, this.height, this.offset, this.depth, {Key? key}) : super(key: key);
 
-	factory Tile.fromIndices(int num, double width, double height, int x, int y, {Key? key}) {
+	factory Tile.fromIndices(int num, double width, double height, int x, int y, double depth, {Key? key}) {
 		return Tile(
 			num, width, height,
 			Offset(x * (width + PADDING_SIZE) + PADDING_SIZE * 0.5, y * (height + PADDING_SIZE) + PADDING_SIZE * 0.5),
+			depth,
 			key: key,
 		);
 	}
@@ -26,6 +27,7 @@ class Tile extends StatefulWidget {
 	final int num;
 	final double width, height;
 	final Offset offset;
+	final double depth;
 
 	@override
 	TileState createState() => TileState();
@@ -89,7 +91,7 @@ class TileState extends SyncState<Map<int, DIRECTION_HINT>, Tile> with SingleTic
 							style: NeumorphicStyle(
 								shape: NeumorphicShape.convex,
 								boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
-								depth: 5,
+								depth: widget.depth,
 								lightSource: LightSource.topLeft,
 								color: themeData.canvasColor,
 								shadowDarkColor: themeData.darkModeEnabled ? Colors.black : Colors.black54,

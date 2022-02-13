@@ -25,7 +25,6 @@ class BoardDisplayState extends SyncState<void, BoardDisplay> {
 	Widget build(BuildContext context) {
 		final List<Widget> cells = <Widget>[];
 
-		/*
 		for (int i = 0; i < puzzle.backPuzzlePieces.length; i++) {
 			if (puzzle.backPuzzlePieces[i] == null) {
 				cells.add(Container());
@@ -35,11 +34,11 @@ class BoardDisplayState extends SyncState<void, BoardDisplay> {
 						(widget.gridSize / PUZZLE_WIDTH) - PADDING_SIZE,
 						(widget.gridSize / PUZZLE_HEIGHT) - PADDING_SIZE,
 						i % PUZZLE_WIDTH, i ~/ PUZZLE_WIDTH,
+						-5,
 						key: Key("${puzzle.backPuzzlePieces[i]} back"))
 				);
 			}
 		}
-		*/
 
 		for (int i = 0; i < puzzle.puzzlePieces.length; i++) {
 			if (puzzle.puzzlePieces[i] == null) {
@@ -50,6 +49,7 @@ class BoardDisplayState extends SyncState<void, BoardDisplay> {
 					(widget.gridSize / PUZZLE_WIDTH) - PADDING_SIZE,
 					(widget.gridSize / PUZZLE_HEIGHT) - PADDING_SIZE,
 					i % PUZZLE_WIDTH, i ~/ PUZZLE_WIDTH,
+					5,
 					key: Key("${puzzle.puzzlePieces[i]} front"))
 				);
 			}

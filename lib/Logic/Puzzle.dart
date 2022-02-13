@@ -18,35 +18,6 @@ enum DIRECTION_HINT {
 	BOTH,
 }
 
-List<List<int?>> magicSquares = <List<int?>>[
-	<int?>[5, null, 7, 6, 4, 2, 1, 8, 3],
-	<int?>[6, null, 9, 8, 5, 2, 1, 10, 4],
-	<int?>[7, null, 5, 2, 4, 6, 3, 8, 1],
-	<int?>[7, null, 8, 6, 5, 4, 2, 10, 3],
-	<int?>[7, null, 11, 10, 6, 2, 1, 12, 5],
-	<int?>[8, null, 7, 4, 5, 6, 3, 10, 2],
-	<int?>[8, null, 13, 12, 7, 2, 1, 14, 6],
-	<int?>[9, null, 6, 2, 5, 8, 4, 10, 1],
-	<int?>[9, null, 12, 10, 7, 4, 2, 14, 5],
-	<int?>[9, null, 15, 14, 8, 2, 1, 16, 7],
-	<int?>[10, null, 11, 8, 7, 6, 3, 14, 4],
-	<int?>[10, null, 14, 12, 8, 4, 2, 16, 6],
-	<int?>[10, null, 17, 16, 9, 2, 1, 18, 8],
-	<int?>[11, null, 7, 2, 6, 10, 5, 12, 1],
-	<int?>[11, null, 10, 6, 7, 8, 4, 14, 3],
-	<int?>[11, null, 13, 10, 8, 6, 3, 16, 5],
-	<int?>[11, null, 16, 14, 9, 4, 2, 18, 7],
-	<int?>[12, null, 9, 4, 7, 10, 5, 14, 2],
-	<int?>[13, null, 8, 2, 7, 12, 6, 14, 1],
-	<int?>[13, null, 11, 6, 8, 10, 5, 16, 3],
-	<int?>[13, null, 14, 10, 9, 8, 4, 18, 5],
-	<int?>[14, null, 10, 4, 8, 12, 6, 16, 2],
-	<int?>[14, null, 13, 8, 9, 10, 5, 18, 4],
-	<int?>[15, null, 9, 2, 8, 14, 7, 16, 1],
-	<int?>[16, null, 11, 4, 9, 14, 7, 18, 2],
-	<int?>[17, null, 10, 2, 9, 16, 8, 18, 1],
-];
-
 const int PUZZLE_WIDTH = 4;
 const int PUZZLE_HEIGHT = 4;
 
@@ -100,6 +71,7 @@ class Puzzle {
 		required this.isBoosted,
 	});
 
+	List<int?> backPuzzlePieces = <int?>[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ];
 	List<int?> puzzlePieces = <int?>[];
 	int numMoves = 0;
 	int numChecks = 0;
@@ -114,14 +86,8 @@ class Puzzle {
 	StringBuffer shareInfo = StringBuffer();
 
 	bool get solved {
-		final int magicNumber = (puzzlePieces[0] ?? 0) + (puzzlePieces[1] ?? 0) + (puzzlePieces[2] ?? 0);
-		return magicNumber == (puzzlePieces[3] ?? 0) + (puzzlePieces[4] ?? 0) + (puzzlePieces[5] ?? 0) &&
-					magicNumber == (puzzlePieces[6] ?? 0) + (puzzlePieces[7] ?? 0) + (puzzlePieces[8] ?? 0) &&
-					magicNumber == (puzzlePieces[0] ?? 0) + (puzzlePieces[3] ?? 0) + (puzzlePieces[6] ?? 0) &&
-					magicNumber == (puzzlePieces[1] ?? 0) + (puzzlePieces[4] ?? 0) + (puzzlePieces[7] ?? 0) &&
-					magicNumber == (puzzlePieces[2] ?? 0) + (puzzlePieces[5] ?? 0) + (puzzlePieces[8] ?? 0) &&
-					magicNumber == (puzzlePieces[0] ?? 0) + (puzzlePieces[4] ?? 0) + (puzzlePieces[8] ?? 0) &&
-					magicNumber == (puzzlePieces[2] ?? 0) + (puzzlePieces[4] ?? 0) + (puzzlePieces[6] ?? 0);
+		print("TODO: solved()");
+		return false;
 	}
 
 	String getRequirements(Tuple4<int, int, int, int> requirements) {

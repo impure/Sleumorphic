@@ -2,7 +2,6 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:binary_codec/binary_codec.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +10,6 @@ import 'package:sleumorphic/Dialogs/StatsDialog.dart';
 import 'package:sleumorphic/Logic/PuzzleFunctions.dart';
 import 'package:sleumorphic/Logic/TileKeyTranslationLayer.dart';
 import 'package:sleumorphic/Widgets/Tile.dart';
-import 'package:tools/SaveLoadManager.dart';
-import 'package:tools/Startup.dart';
 import 'package:tuple/tuple.dart';
 
 enum DIRECTION_HINT {
@@ -93,8 +90,27 @@ class Puzzle {
 	StringBuffer shareInfo = StringBuffer();
 
 	bool get solved {
-		print("TODO: solved()");
-		return false;
+		int counter = 0;
+		for (int i = 0; i < puzzlePieces.length; i++) {
+			if (puzzlePieces[i] != null) {
+				if (puzzlePieces[i]! <= counter) {
+					return false;
+				} else {
+					counter = puzzlePieces[i]!;
+				}
+			}
+		}
+		counter = 0;
+		for (int i = 0; i < backPuzzlePieces.length; i++) {
+			if (backPuzzlePieces[i] != null) {
+				if (backPuzzlePieces[i] <= counter) {
+					return false;
+				} else {
+					counter = backPuzzlePieces[i];
+				}
+			}
+		}
+		return true;
 	}
 
 	void swapPieces() {
@@ -115,7 +131,6 @@ class Puzzle {
 
 		final int numIndex = keyTranslationLayer!.keys.indexOf(key);
 		final int holeIndex = keyTranslationLayer!.keys.indexOf(null);
-		print("$numIndex $holeIndex");
 
 		void onSuccess() {
 			numMoves++;
@@ -174,6 +189,7 @@ class Puzzle {
 	}
 
 	Future<void> save() async {
+		/*
 		if (kIsWeb) {
 			unawaited(prefs!.setString("Save", binaryCodec.encode(toMap()).toString().
 					replaceAll(" ", "").replaceAll("[", "").replaceAll("]", "")));
@@ -186,11 +202,11 @@ class Puzzle {
 					debugPrint("Save");
 				},
 				tryDisplaySavedBlockedMessage: () {
-					// Flurdle saves cannot be blocked
 				},
 				authenticateTime: false,
 			);
 		}
+		*/
 	}
 }
 

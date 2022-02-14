@@ -11,13 +11,14 @@ import 'package:state_groups/state_groups.dart';
 StateGroup<Map<int, DIRECTION_HINT>> tilesStateGroup = StateGroup<Map<int, DIRECTION_HINT>>();
 
 class Tile extends StatefulWidget {
-	const Tile(this.num, this.width, this.height, this.offset, this.foreground, {Key? key}) : super(key: key);
+	const Tile(this.num, this.width, this.height, this.offset, this.foreground, this.unitOffset, {Key? key}) : super(key: key);
 
 	factory Tile.fromIndices(int num, double width, double height, int x, int y, bool foreground, {Key? key}) {
 		return Tile(
 			num, width, height,
 			Offset(x * (width + PADDING_SIZE) + PADDING_SIZE * 0.5, y * (height + PADDING_SIZE) + PADDING_SIZE * 0.5),
 			foreground,
+			Offset(x.toDouble(), y.toDouble()),
 			key: key,
 		);
 	}
@@ -25,6 +26,7 @@ class Tile extends StatefulWidget {
 	final int num;
 	final double width, height;
 	final Offset offset;
+	final Offset unitOffset;
 	final bool foreground;
 
 	@override
@@ -86,7 +88,7 @@ class TileState extends SyncState<Map<int, DIRECTION_HINT>, Tile> with SingleTic
 						height: widget.height,
 						width: widget.width,
 						child: NeumorphicTile(
-							offset: widget.offset,
+							offset: widget.unitOffset,
 							height: widget.height,
 							width: widget.width,
 							num: widget.num,

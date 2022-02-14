@@ -48,7 +48,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 
 	@override
 	void update(Offset? offset) {
-		Future<void>.delayed(Duration(milliseconds: (2 * (widget.offset - offset!).distance).round())).then((_) {
+		Future<void>.delayed(Duration(milliseconds: (100 * ((widget.offset - offset!).distance - 1)).round())).then((_) {
 			_controller.forward(from: 0);
 		});
 
@@ -59,7 +59,10 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 	void initState() {
 		_controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
 		_controller.value = 0;
-		_animation = Tween<double>(begin: 0, end: 2).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+		_animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+		_animation.addListener(() {
+			print(_animation.value);
+		});
 		super.initState();
 	}
 
@@ -81,7 +84,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 					style: NeumorphicStyle(
 						shape: NeumorphicShape.convex,
 						boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
-						depth: widget.foreground ? (1 - _animation.value).abs() * 5 : -5,
+						depth: widget.foreground ? (1 - _animation.value * 2).abs() * 5 : -5,
 						lightSource: LightSource.topLeft,
 						color: themeData.canvasColor,
 						shadowDarkColor: themeData.darkModeEnabled ? Colors.black : Colors.black54,

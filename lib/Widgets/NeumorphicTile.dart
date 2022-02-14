@@ -53,9 +53,9 @@ class NeumorphicTileState extends SyncState<void, NeumorphicTile> with SingleTic
 
 	@override
 	void initState() {
-		_controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 200));
+		_controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 2000));
 		_controller.value = 0;
-		_animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutQuart));
+		_animation = Tween<double>(begin: 0, end: 2).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutQuart));
 		super.initState();
 	}
 
@@ -77,7 +77,7 @@ class NeumorphicTileState extends SyncState<void, NeumorphicTile> with SingleTic
 					style: NeumorphicStyle(
 						shape: NeumorphicShape.convex,
 						boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
-						depth: widget.foreground ? _animation.value * 5 : -5,
+						depth: widget.foreground ? (1 - _animation.value).abs() * 5 : -5,
 						lightSource: LightSource.topLeft,
 						color: themeData.canvasColor,
 						shadowDarkColor: themeData.darkModeEnabled ? Colors.black : Colors.black54,

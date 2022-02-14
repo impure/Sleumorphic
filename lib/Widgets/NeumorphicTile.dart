@@ -139,7 +139,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 								height: widget.height,
 								width: widget.width,
 								child: Padding(
-									padding: const EdgeInsets.only(top: 10),
+									padding: EdgeInsets.only(top: max(widget.width, widget.height) * 0.075),
 									child: NeumorphicText(
 										displayNum.toString(),
 										style: NeumorphicStyle(
@@ -148,7 +148,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 											shadowLightColor: themeData.darkModeEnabled ? Colors.white70 : Colors.white,
 										),
 										textStyle: NeumorphicTextStyle(
-											fontSize: 50,
+											fontSize: max(widget.width, widget.height) * 0.55,
 											fontWeight: FontWeight.w700,
 										),
 									),

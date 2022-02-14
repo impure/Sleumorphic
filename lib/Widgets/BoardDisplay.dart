@@ -34,8 +34,7 @@ class BoardDisplayState extends SyncState<void, BoardDisplay> {
 						(widget.gridSize / PUZZLE_WIDTH) - PADDING_SIZE,
 						(widget.gridSize / PUZZLE_HEIGHT) - PADDING_SIZE,
 						i % PUZZLE_WIDTH, i ~/ PUZZLE_WIDTH,
-						false,
-						key: Key("${puzzle.backPuzzlePieces[i]} back"))
+						false)
 				);
 			}
 		}
@@ -49,8 +48,7 @@ class BoardDisplayState extends SyncState<void, BoardDisplay> {
 					(widget.gridSize / PUZZLE_WIDTH) - PADDING_SIZE,
 					(widget.gridSize / PUZZLE_HEIGHT) - PADDING_SIZE,
 					i % PUZZLE_WIDTH, i ~/ PUZZLE_WIDTH,
-					true,
-					key: Key("${puzzle.puzzlePieces[i]} front"))
+					true)
 				);
 			}
 		}

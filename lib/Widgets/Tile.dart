@@ -93,7 +93,6 @@ class TileState extends SyncState<Map<int, DIRECTION_HINT>, Tile> with SingleTic
 							width: widget.width,
 							num: widget.num,
 							foreground: widget.foreground,
-							key: Key("Neumorphic ${widget.num}"),
 						),
 					),
 				);

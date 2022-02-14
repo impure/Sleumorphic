@@ -51,11 +51,14 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 
 	@override
 	void update(Offset? offset) {
-		Future<void>.delayed(Duration(milliseconds: (75 * ((widget.offset - offset!).distance - 1)).round())).then((_) {
-			_controller.forward(from: 0);
-		});
-
-		super.update(null);
+		if (widget.foreground) {
+			Future<void>.delayed(Duration(milliseconds: (75 * ((widget.offset - offset!).distance - 1)).round())).then((_) {
+				_controller.forward(from: 0);
+			});
+		} else {
+			displayNum = widget.num;
+			super.update(offset);
+		}
 	}
 
 	@override

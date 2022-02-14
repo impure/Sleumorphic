@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:sleumorphic/Data/Data.dart';
 import 'package:sleumorphic/Dialogs/StatsDialog.dart';
 import 'package:sleumorphic/Logic/PuzzleFunctions.dart';
+import 'package:sleumorphic/Logic/TileKeyTranslationLayer.dart';
 import 'package:sleumorphic/Widgets/Tile.dart';
 import 'package:tools/SaveLoadManager.dart';
 import 'package:tools/Startup.dart';
@@ -48,6 +49,8 @@ class Puzzle {
 			return false;
 		});
 
+		keyTranslationLayer = TileKeyTranslationLayer(puzzlePieces);
+
 		// Also make sure no tiles are currently coloured
 		tilesStateGroup.notifyAll(null);
 		boardStateGroup.notifyAll(null);
@@ -61,6 +64,7 @@ class Puzzle {
 			puzzlePieces: List<int?>.from(data[Data.PUZZLE_PIECES.index]),
 			isBoosted: (data[Data.MAX_CHECKS_DEPRECATED.index] != null && data[Data.MAX_CHECKS_DEPRECATED.index] >= 6) || data[Data.IS_BOOSTED.index] == true,
 			shareInfo: StringBuffer(data[Data.SHARE_INFO.index]),
+			keyTranslationLayer: TileKeyTranslationLayer(List<int?>.from(data[Data.PUZZLE_PIECES.index])),
 		);
 	}
 
@@ -70,6 +74,7 @@ class Puzzle {
 		required this.puzzlePieces,
 		required this.shareInfo,
 		required this.isBoosted,
+		required this.keyTranslationLayer,
 	});
 
 	List<int> backPuzzlePieces = <int>[ 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 ];
@@ -77,6 +82,7 @@ class Puzzle {
 	int numMoves = 0;
 	int numChecks = 0;
 	bool isBoosted = false;
+	TileKeyTranslationLayer? keyTranslationLayer;
 
 	// Schedule a save in the future and if no one overwrites it save.
 	// This is to cut down on unnecessary saves
@@ -126,15 +132,19 @@ class Puzzle {
 
 		if (numIndex == holeIndex - 1 && canSwapHoleWithLeft(holeIndex)) {
 			swapHoleWithLeft(holeIndex, puzzlePieces);
+			swapHoleWithLeft(holeIndex, keyTranslationLayer!.keys);
 			onSuccess();
 		} else if (numIndex == holeIndex + 1 && canSwapHoleWithRight(holeIndex)) {
 			swapHoleWithRight(holeIndex, puzzlePieces);
+			swapHoleWithRight(holeIndex, keyTranslationLayer!.keys);
 			onSuccess();
 		} else if (numIndex == holeIndex - PUZZLE_WIDTH && canSwapHoleWithUp(holeIndex)) {
 			swapHoleWithUp(holeIndex, puzzlePieces);
+			swapHoleWithUp(holeIndex, keyTranslationLayer!.keys);
 			onSuccess();
 		} else if (numIndex == holeIndex + PUZZLE_WIDTH && canSwapHoleWithDown(holeIndex)) {
 			swapHoleWithDown(holeIndex, puzzlePieces);
+			swapHoleWithDown(holeIndex, keyTranslationLayer!.keys);
 			onSuccess();
 		}
 	}

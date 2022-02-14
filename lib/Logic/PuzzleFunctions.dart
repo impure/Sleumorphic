@@ -28,10 +28,10 @@ void applySwap(Swap swap, int holeIndex, List<int?> tiles) {
 	}
 }
 
-void swapHoleWithLeft(int holeIndex, List<int?> puzzle) => swap(holeIndex, holeIndex - 1, puzzle);
-void swapHoleWithRight(int holeIndex, List<int?> puzzle) => swap(holeIndex, holeIndex + 1, puzzle);
-void swapHoleWithUp(int holeIndex, List<int?> puzzle) => swap(holeIndex, holeIndex - PUZZLE_WIDTH, puzzle);
-void swapHoleWithDown(int holeIndex, List<int?> puzzle) => swap(holeIndex, holeIndex + PUZZLE_WIDTH, puzzle);
+void swapHoleWithLeft(int holeIndex, List<dynamic> puzzle) => swap(holeIndex, holeIndex - 1, puzzle);
+void swapHoleWithRight(int holeIndex, List<dynamic> puzzle) => swap(holeIndex, holeIndex + 1, puzzle);
+void swapHoleWithUp(int holeIndex, List<dynamic> puzzle) => swap(holeIndex, holeIndex - PUZZLE_WIDTH, puzzle);
+void swapHoleWithDown(int holeIndex, List<dynamic> puzzle) => swap(holeIndex, holeIndex + PUZZLE_WIDTH, puzzle);
 
 bool sameRow(int currentIndex, int correctIndex) {
 	return currentIndex ~/ PUZZLE_WIDTH == correctIndex ~/ PUZZLE_WIDTH;
@@ -61,7 +61,7 @@ Tuple4<int, int, int, int> getBottomRequirements(List<int?> futurePuzzle) {
 }
 */
 
-void swap(int piece1, int piece2, List<int?> puzzle) {
+void swap(int piece1, int piece2, List<dynamic> puzzle) {
 	final int? temp = puzzle[piece1];
 	puzzle[piece1] = puzzle[piece2];
 	puzzle[piece2] = temp;

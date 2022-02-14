@@ -175,6 +175,34 @@ class Puzzle {
 		return "${requirements.item1.toString().padLeft(2, "0")} ${requirements.item2.toString().padLeft(2, "0")} ${requirements.item3.toString().padLeft(2, "0")} ${requirements.item4.toString().padLeft(2, "0")}";
 	}
 
+	void trySwapHoleWithLeft() {
+		final int holeIndex = keyTranslationLayer!.keys.indexOf(null);
+		if (canSwapHoleWithLeft(holeIndex)) {
+			trySwapHoleWith(keyTranslationLayer!.keys[holeIndex - 1]);
+		}
+	}
+
+	void trySwapHoleWithRight() {
+		final int holeIndex = keyTranslationLayer!.keys.indexOf(null);
+		if (canSwapHoleWithRight(holeIndex)) {
+			trySwapHoleWith(keyTranslationLayer!.keys[holeIndex + 1]);
+		}
+	}
+
+	void trySwapHoleWithUp() {
+		final int holeIndex = keyTranslationLayer!.keys.indexOf(null);
+		if (canSwapHoleWithUp(holeIndex)) {
+			trySwapHoleWith(keyTranslationLayer!.keys[holeIndex - PUZZLE_WIDTH]);
+		}
+	}
+
+	void trySwapHoleWithDown() {
+		final int holeIndex = keyTranslationLayer!.keys.indexOf(null);
+		if (canSwapHoleWithDown(holeIndex)) {
+			trySwapHoleWith(keyTranslationLayer!.keys[holeIndex + PUZZLE_WIDTH]);
+		}
+	}
+
 	void trySwapHoleWith(Key? key) {
 
 		final int numIndex = keyTranslationLayer!.keys.indexOf(key);

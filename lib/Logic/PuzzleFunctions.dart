@@ -1,7 +1,4 @@
 
-import 'dart:math';
-
-import 'package:sleumorphic/Data/Data.dart';
 import 'package:sleumorphic/Logic/Puzzle.dart';
 import 'package:tools/RandomBag.dart';
 import 'package:tuple/tuple.dart';

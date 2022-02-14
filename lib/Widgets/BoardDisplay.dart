@@ -66,7 +66,6 @@ class BoardDisplayState extends SyncState<void, BoardDisplay> {
 					);
 					return;
 				}
-				/*
 				if (key.isKeyPressed(LogicalKeyboardKey.arrowLeft)) {
 					if (!invertControls) {
 						puzzle.trySwapHoleWithLeft();
@@ -92,7 +91,6 @@ class BoardDisplayState extends SyncState<void, BoardDisplay> {
 						puzzle.trySwapHoleWithUp();
 					}
 				}
-				*/
 			},
 			focusNode: FocusNode(),
 			child: Column(

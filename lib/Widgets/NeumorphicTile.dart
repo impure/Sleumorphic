@@ -138,25 +138,21 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 							child: SizedBox(
 								height: widget.height,
 								width: widget.width,
-								child: Center(
-									child: Padding(
-										padding: EdgeInsets.symmetric(vertical: widget.width * 0.2, horizontal: widget.height * 0.2),
-										child: AutoSizeText(
-											displayNum.toString(),
-											style: const TextStyle(
-												//color: Colors.white,
-												fontSize: 50,
-												fontWeight: FontWeight.w900,
-												//shadows: <Shadow>[
-												//	Shadow(
-												//		color: shadowColour,
-												//		blurRadius: 10,
-												//	),
-												//],
-											),
+								child: Padding(
+									padding: const EdgeInsets.only(top: 10),
+									child: NeumorphicText(
+										displayNum.toString(),
+										style: NeumorphicStyle(
+											depth: max(0, widget.foreground ? computeDepth(_animation.value) : -maxDepth),
+											shadowDarkColor: themeData.darkModeEnabled ? Colors.black : Colors.black54,
+											shadowLightColor: themeData.darkModeEnabled ? Colors.white70 : Colors.white,
+										),
+										textStyle: NeumorphicTextStyle(
+											fontSize: 50,
+											fontWeight: FontWeight.w700,
 										),
 									),
-								),
+								)
 							),
 						),
 					],

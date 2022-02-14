@@ -100,7 +100,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 						Neumorphic(
 							style: NeumorphicStyle(
 								shape: NeumorphicShape.convex,
-								boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
+								boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(max(widget.width, widget.height) * 0.1)),
 								depth: widget.foreground ? computeDepth(_animation.value) : -maxDepth,
 								lightSource: LightSource.topLeft,
 								color: themeData.canvasColor,

@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:sleumorphic/Data/Data.dart';
 import 'package:sleumorphic/Logic/Puzzle.dart';
 import 'package:sleumorphic/Widgets/NeumorphicTile.dart';
 import 'package:state_groups/state_groups.dart';
@@ -13,10 +12,10 @@ StateGroup<Map<int, DIRECTION_HINT>> tilesStateGroup = StateGroup<Map<int, DIREC
 class Tile extends StatefulWidget {
 	const Tile(this.num, this.width, this.height, this.offset, this.foreground, this.unitOffset, {Key? key}) : super(key: key);
 
-	factory Tile.fromIndices(int num, double width, double height, int x, int y, bool foreground, {Key? key}) {
+	factory Tile.fromIndices(int num, double width, double height, int x, int y, bool foreground, double paddingSize, {Key? key}) {
 		return Tile(
 			num, width, height,
-			Offset(x * (width + PADDING_SIZE) + PADDING_SIZE * 0.5, y * (height + PADDING_SIZE) + PADDING_SIZE * 0.5),
+			Offset(x * (width + paddingSize) + paddingSize * 0.5, y * (height + paddingSize) + paddingSize * 0.5),
 			foreground,
 			Offset(x.toDouble(), y.toDouble()),
 			key: key,

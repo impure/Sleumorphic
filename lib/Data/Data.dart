@@ -3,7 +3,6 @@ import 'package:sleumorphic/Logic/Puzzle.dart';
 import 'package:state_groups/state_groups.dart';
 
 late Puzzle puzzle;
-const double PADDING_SIZE = 20;
 
 enum Swap {
 	LEFT, UP, DOWN, RIGHT, INVERT,

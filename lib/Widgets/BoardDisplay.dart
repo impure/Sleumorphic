@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sleumorphic/Data/Data.dart';
@@ -26,16 +28,21 @@ class BoardDisplayState extends SyncState<void, BoardDisplay> {
 	Widget build(BuildContext context) {
 		final List<Widget> cells = <Widget>[];
 
+		final double width = widget.gridSize / PUZZLE_WIDTH;
+		final double height = widget.gridSize / PUZZLE_HEIGHT;
+		final double paddingSize = max(width, height) * 0.15;
+
 		for (int i = 0; i < puzzle.backPuzzlePieces.length; i++) {
 			if (puzzle.backPuzzlePieces[i] == null) {
 				cells.add(Container());
 			} else {
 				cells.add(Tile.fromIndices(
-						puzzle.backPuzzlePieces[i],
-						(widget.gridSize / PUZZLE_WIDTH) - PADDING_SIZE,
-						(widget.gridSize / PUZZLE_HEIGHT) - PADDING_SIZE,
-						i % PUZZLE_WIDTH, i ~/ PUZZLE_WIDTH,
-						false
+					puzzle.backPuzzlePieces[i],
+					width - paddingSize,
+					height - paddingSize,
+					i % PUZZLE_WIDTH, i ~/ PUZZLE_WIDTH,
+					false,
+					paddingSize,
 				));
 			}
 		}
@@ -46,10 +53,11 @@ class BoardDisplayState extends SyncState<void, BoardDisplay> {
 			} else {
 				cells.add(Tile.fromIndices(
 					puzzle.puzzlePieces[i]!,
-					(widget.gridSize / PUZZLE_WIDTH) - PADDING_SIZE,
-					(widget.gridSize / PUZZLE_HEIGHT) - PADDING_SIZE,
+					width - paddingSize,
+					height - paddingSize,
 					i % PUZZLE_WIDTH, i ~/ PUZZLE_WIDTH,
 					true,
+					paddingSize,
 					key: puzzle.keyTranslationLayer!.keys[i])
 				);
 			}

@@ -148,7 +148,7 @@ List<Swap> autoSolve(List<int?> currentPuzzle, List<int?> solution) {
 
 void applySwaps(List<Swap> swaps, List<int?> gameBoard) {
 	for (int i = 0; i < swaps.length; i++) {
-		applySwap(swaps[i], gameBoard.indexOf(null), gameBoard);
+		puzzle.applySwap(swaps[i], gameBoard.indexOf(null), gameBoard);
 	}
 }
 

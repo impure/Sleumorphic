@@ -51,7 +51,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 
 	@override
 	void update(Offset? offset) {
-		Future<void>.delayed(Duration(milliseconds: (100 * ((widget.offset - offset!).distance - 1)).round())).then((_) {
+		Future<void>.delayed(Duration(milliseconds: (50 * ((widget.offset - offset!).distance - 1)).round())).then((_) {
 			_controller.forward(from: 0);
 		});
 
@@ -60,7 +60,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 
 	@override
 	void initState() {
-		_controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
+		_controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 250));
 		_controller.value = 0;
 		_animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: _controller, curve: Curves.linear));
 		_animation.addListener(() {

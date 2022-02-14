@@ -11,7 +11,7 @@ class TileKeyTranslationLayer {
 			if (tiles[i] == null) {
 				keys.add(null);
 			} else {
-				keys.add(Key(tiles[i].toString()));
+				keys.add(Key(i.toString()));
 			}
 		}
 		return TileKeyTranslationLayer._(keys);

@@ -96,6 +96,7 @@ class Puzzle {
 		while (true) {
 			swaps.clear();
 			final int holeIndex = puzzlePieces.indexOf(null);
+			swaps.add(Swap.INVERT);
 			if (canSwapHoleWithLeft(holeIndex)) {
 				swaps.add(Swap.LEFT);
 			}
@@ -113,6 +114,26 @@ class Puzzle {
 			if (counter >= numSwaps && (keepGoing == null || !keepGoing())) {
 				break;
 			}
+		}
+	}
+
+	void applySwap(Swap swap, int holeIndex, List<int?> tiles) {
+		switch (swap) {
+			case Swap.LEFT:
+				swapHoleWithLeft(holeIndex, tiles);
+				break;
+			case Swap.UP:
+				swapHoleWithUp(holeIndex, tiles);
+				break;
+			case Swap.DOWN:
+				swapHoleWithDown(holeIndex, tiles);
+				break;
+			case Swap.RIGHT:
+				swapHoleWithRight(holeIndex, tiles);
+				break;
+			case Swap.INVERT:
+				invertPieces();
+				break;
 		}
 	}
 
@@ -140,7 +161,7 @@ class Puzzle {
 		return true;
 	}
 
-	void swapPieces() {
+	void invertPieces() {
 		for (int i = 0; i < puzzlePieces.length; i++) {
 			if (puzzlePieces[i] != null) {
 				final int tempValue = backPuzzlePieces[i];

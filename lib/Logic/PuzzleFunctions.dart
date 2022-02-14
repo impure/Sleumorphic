@@ -11,23 +11,6 @@ bool canSwapHoleWithRight(int holeIndex) => holeIndex % PUZZLE_WIDTH != (PUZZLE_
 bool canSwapHoleWithUp(int holeIndex) => holeIndex >= PUZZLE_WIDTH;
 bool canSwapHoleWithDown(int holeIndex) => holeIndex <= (PUZZLE_HEIGHT - 1) * PUZZLE_WIDTH - 1;
 
-void applySwap(Swap swap, int holeIndex, List<int?> tiles) {
-	switch (swap) {
-	  case Swap.LEFT:
-			swapHoleWithLeft(holeIndex, tiles);
-	    break;
-	  case Swap.UP:
-			swapHoleWithUp(holeIndex, tiles);
-	    break;
-	  case Swap.DOWN:
-			swapHoleWithDown(holeIndex, tiles);
-	    break;
-	  case Swap.RIGHT:
-			swapHoleWithRight(holeIndex, tiles);
-	    break;
-	}
-}
-
 void swapHoleWithLeft(int holeIndex, List<dynamic> puzzle) => swap(holeIndex, holeIndex - 1, puzzle);
 void swapHoleWithRight(int holeIndex, List<dynamic> puzzle) => swap(holeIndex, holeIndex + 1, puzzle);
 void swapHoleWithUp(int holeIndex, List<dynamic> puzzle) => swap(holeIndex, holeIndex - PUZZLE_WIDTH, puzzle);

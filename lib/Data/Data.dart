@@ -6,7 +6,7 @@ late Puzzle puzzle;
 const double PADDING_SIZE = 20;
 
 enum Swap {
-	LEFT, UP, DOWN, RIGHT,
+	LEFT, UP, DOWN, RIGHT, INVERT,
 }
 
 void notifyGame() {

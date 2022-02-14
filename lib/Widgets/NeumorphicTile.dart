@@ -123,7 +123,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 						),
 						onTap: () {
 							if (!widget.foreground) {
-								puzzle.swapPieces();
+								puzzle.invertPieces();
 								boardStateGroup.notifyAll();
 								neumorphicTiles.notifyAll(widget.offset);
 								return;

@@ -1,15 +1,12 @@
 
 import 'dart:ui';
 
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:sleumorphic/Data/Data.dart';
-import 'package:sleumorphic/Dialogs/StatsDialog.dart';
 import 'package:sleumorphic/Logic/Puzzle.dart';
 import 'package:sleumorphic/Widgets/NeumorphicTile.dart';
 import 'package:state_groups/state_groups.dart';
-import 'package:tools/BasicExtensions.dart';
 
 StateGroup<Map<int, DIRECTION_HINT>> tilesStateGroup = StateGroup<Map<int, DIRECTION_HINT>>();
 
@@ -78,7 +75,7 @@ class TileState extends SyncState<Map<int, DIRECTION_HINT>, Tile> with SingleTic
 	@override
 	Widget build(BuildContext context) {
 
-		final ThemeData themeData = Theme.of(context);
+		//final ThemeData themeData = Theme.of(context);
 
 		return AnimatedBuilder(
 			animation: _controller,

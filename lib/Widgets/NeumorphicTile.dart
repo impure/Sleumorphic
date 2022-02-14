@@ -19,25 +19,19 @@ class NeumorphicTile extends StatefulWidget {
   final bool foreground;
 
 	@override
-	TileState createState() => TileState();
+	NeumorphicTileState createState() => NeumorphicTileState();
 }
 
-class TileState extends SyncState<void, NeumorphicTile> with SingleTickerProviderStateMixin {
+class NeumorphicTileState extends SyncState<void, NeumorphicTile> with SingleTickerProviderStateMixin {
 
-	TileState() : super(neumorphicTiles);
-
-	/*
-	Offset? oldOffset;
+	NeumorphicTileState() : super(neumorphicTiles);
 
 	late AnimationController _controller;
 	late Animation<double> _animation;
-	DIRECTION_HINT? hintInfo;
 
-	@override
-	void update(Map<int, DIRECTION_HINT>? message) {
-		hintInfo = message?[widget.num];
-		super.update(message);
-  }
+	/*
+	Offset? oldOffset;
+	DIRECTION_HINT? hintInfo;
 
 	@override
 	void didUpdateWidget(Tile oldWidget) {
@@ -48,6 +42,13 @@ class TileState extends SyncState<void, NeumorphicTile> with SingleTickerProvide
 		}
 
 		super.didUpdateWidget(oldWidget);
+	}
+	*/
+
+	@override
+	void update(_) {
+		_controller.forward(from: 0);
+		super.update(null);
 	}
 
 	@override
@@ -63,65 +64,70 @@ class TileState extends SyncState<void, NeumorphicTile> with SingleTickerProvide
 		_controller.dispose();
 		super.dispose();
 	}
-	*/
 
 	@override
 	Widget build(BuildContext context) {
 
 		final ThemeData themeData = Theme.of(context);
 
-		return Neumorphic(
-			style: NeumorphicStyle(
-				shape: NeumorphicShape.convex,
-				boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
-				depth: widget.foreground ? 5 : -5,
-				lightSource: LightSource.topLeft,
-				color: themeData.canvasColor,
-				shadowDarkColor: themeData.darkModeEnabled ? Colors.black : Colors.black54,
-				shadowLightColor: themeData.darkModeEnabled ? Colors.white70 : Colors.white,
-			),
-			child: GestureDetector(
-				behavior: HitTestBehavior.translucent,
-				child: SizedBox(
-					height: widget.height,
-					width: widget.width,
-					child: Center(
-						child: Padding(
-							padding: EdgeInsets.symmetric(vertical: widget.width * 0.2, horizontal: widget.height * 0.2),
-							child: AutoSizeText(
-								widget.num.toString(),
-								style: const TextStyle(
-									//color: Colors.white,
-									fontSize: 50,
-									fontWeight: FontWeight.w900,
-									//shadows: <Shadow>[
-									//	Shadow(
-									//		color: shadowColour,
-									//		blurRadius: 10,
-									//	),
-									//],
+		return AnimatedBuilder(
+			animation: _animation,
+			builder: (_, __) {
+				return Neumorphic(
+					style: NeumorphicStyle(
+						shape: NeumorphicShape.convex,
+						boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
+						depth: widget.foreground ? _animation.value * 5 : -5,
+						lightSource: LightSource.topLeft,
+						color: themeData.canvasColor,
+						shadowDarkColor: themeData.darkModeEnabled ? Colors.black : Colors.black54,
+						shadowLightColor: themeData.darkModeEnabled ? Colors.white70 : Colors.white,
+					),
+					child: GestureDetector(
+						behavior: HitTestBehavior.translucent,
+						child: SizedBox(
+							height: widget.height,
+							width: widget.width,
+							child: Center(
+								child: Padding(
+									padding: EdgeInsets.symmetric(vertical: widget.width * 0.2, horizontal: widget.height * 0.2),
+									child: AutoSizeText(
+										widget.num.toString(),
+										style: const TextStyle(
+											//color: Colors.white,
+											fontSize: 50,
+											fontWeight: FontWeight.w900,
+											//shadows: <Shadow>[
+											//	Shadow(
+											//		color: shadowColour,
+											//		blurRadius: 10,
+											//	),
+											//],
+										),
+									),
 								),
 							),
 						),
+						onTap: () {
+							if (!widget.foreground) {
+								neumorphicTiles.notifyAll();
+								return;
+							}
+							if (puzzle.solved) {
+								showDialog(
+									context: context,
+									builder: (_) {
+										return const StatsDialog();
+									}
+								);
+								return;
+							}
+							puzzle.trySwapHoleWith(widget.num);
+							puzzle.checkWin(context);
+						},
 					),
-				),
-				onTap: () {
-					if (!widget.foreground) {
-						return;
-					}
-					if (puzzle.solved) {
-						showDialog(
-								context: context,
-								builder: (_) {
-									return const StatsDialog();
-								}
-						);
-						return;
-					}
-					puzzle.trySwapHoleWith(widget.num);
-					puzzle.checkWin(context);
-				},
-			),
+				);
+			},
 		);
 		/*
 		return AnimatedBuilder(

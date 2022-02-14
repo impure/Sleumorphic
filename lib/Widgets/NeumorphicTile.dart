@@ -60,7 +60,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 
 	@override
 	void initState() {
-		_controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 250));
+		_controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
 		_controller.value = 0;
 		_animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: _controller, curve: Curves.linear));
 		_animation.addListener(() {

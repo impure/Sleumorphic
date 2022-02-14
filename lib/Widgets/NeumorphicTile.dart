@@ -29,6 +29,8 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 
 	late AnimationController _controller;
 	late Animation<double> _animation;
+	double? _prevAnimationValue;
+	late int displayNum;
 
 	/*
 	Offset? oldOffset;
@@ -61,8 +63,12 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 		_controller.value = 0;
 		_animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
 		_animation.addListener(() {
-			print(_animation.value);
+			if (_prevAnimationValue != null && _prevAnimationValue! < 0.5 && _animation.value >= 0.5) {
+				displayNum = widget.num;
+			}
+			_prevAnimationValue = _animation.value;
 		});
+		displayNum = widget.num;
 		super.initState();
 	}
 
@@ -99,7 +105,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 								child: Padding(
 									padding: EdgeInsets.symmetric(vertical: widget.width * 0.2, horizontal: widget.height * 0.2),
 									child: AutoSizeText(
-										widget.num.toString(),
+										displayNum.toString(),
 										style: const TextStyle(
 											//color: Colors.white,
 											fontSize: 50,

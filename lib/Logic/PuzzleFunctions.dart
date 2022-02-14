@@ -67,34 +67,6 @@ void swap(int piece1, int piece2, List<dynamic> puzzle) {
 	puzzle[piece2] = temp;
 }
 
-List<int?> simulateRandomSwaps(List<int?> tilesToCopy, int numSwaps, Random rng, {bool Function(List<int?> currentTiles)? keepGoing}) {
-	final List<int?> ourTiles = tilesToCopy.toList();
-	final List<Swap> swaps = <Swap>[];
-	int counter = 1;
-	while (true) {
-		swaps.clear();
-		final int holeIndex = ourTiles.indexOf(null);
-		if (canSwapHoleWithLeft(holeIndex)) {
-			swaps.add(Swap.LEFT);
-		}
-		if (canSwapHoleWithRight(holeIndex)) {
-			swaps.add(Swap.RIGHT);
-		}
-		if (canSwapHoleWithUp(holeIndex)) {
-			swaps.add(Swap.UP);
-		}
-		if (canSwapHoleWithDown(holeIndex)) {
-			swaps.add(Swap.DOWN);
-		}
-		applySwap(swaps[rng.nextInt(swaps.length)], holeIndex, ourTiles);
-		counter++;
-		if (counter >= numSwaps && (keepGoing == null || !keepGoing(ourTiles))) {
-			break;
-		}
-	}
-	return ourTiles;
-}
-
 RandomBag<int> getRandomBagOfUnusedNumbers(List<int?> usedNumbers) {
 	final Set<int?> numbers = usedNumbers.toSet();
 	final RandomBag<int> returnBag = RandomBag<int>();

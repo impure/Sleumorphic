@@ -31,15 +31,16 @@ class Puzzle {
 
 		final Random rng = Random();
 
-		final List<int?> possibleSolution = <int?>[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, null, ];
-		puzzlePieces = possibleSolution.toList();
-
-		//print("The magic sum is: ${(possibleSolution[0] ?? 0) + (possibleSolution[1] ?? 0) + (possibleSolution[2] ?? 0)}");
+		backPuzzlePieces = <int>[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ];
+		puzzlePieces = <int?>[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, null ];
 
 		// Get end state
-		puzzlePieces = simulateRandomSwaps(puzzlePieces, 100, rng, keepGoing: (List<int?> currentTiles) {
-			for (int i = 0; i < currentTiles.length; i++) {
-				if (currentTiles[i] == possibleSolution[i]) {
+		simulateRandomSwaps(100, rng, keepGoing: () {
+			for (int i = 0; i < puzzlePieces.length; i++) {
+				if (puzzlePieces[i] == i) {
+					return true;
+				}
+				if (backPuzzlePieces[i] == i) {
 					return true;
 				}
 			}
@@ -75,7 +76,7 @@ class Puzzle {
 	});
 
 	List<int> backPuzzlePieces = <int>[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ];
-	List<int?> puzzlePieces = <int?>[];
+	List<int?> puzzlePieces = <int?>[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, null ];
 	int numMoves = 0;
 	int numChecks = 0;
 	bool isBoosted = false;
@@ -88,6 +89,32 @@ class Puzzle {
 	int get currentMaxNumChecks => 6;
 
 	StringBuffer shareInfo = StringBuffer();
+
+	void simulateRandomSwaps(int numSwaps, Random rng, {bool Function()? keepGoing}) {
+		final List<Swap> swaps = <Swap>[];
+		int counter = 1;
+		while (true) {
+			swaps.clear();
+			final int holeIndex = puzzlePieces.indexOf(null);
+			if (canSwapHoleWithLeft(holeIndex)) {
+				swaps.add(Swap.LEFT);
+			}
+			if (canSwapHoleWithRight(holeIndex)) {
+				swaps.add(Swap.RIGHT);
+			}
+			if (canSwapHoleWithUp(holeIndex)) {
+				swaps.add(Swap.UP);
+			}
+			if (canSwapHoleWithDown(holeIndex)) {
+				swaps.add(Swap.DOWN);
+			}
+			applySwap(swaps[rng.nextInt(swaps.length)], holeIndex, puzzlePieces);
+			counter++;
+			if (counter >= numSwaps && (keepGoing == null || !keepGoing())) {
+				break;
+			}
+		}
+	}
 
 	bool get solved {
 		int counter = 0;

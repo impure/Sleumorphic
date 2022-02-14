@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -138,7 +139,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 								height: widget.height,
 								width: widget.width,
 								child: Padding(
-									padding: EdgeInsets.only(top: max(widget.width, widget.height) * 0.075),
+									padding: EdgeInsets.only(top: max(widget.width, widget.height) * (kIsWeb ? 0.15 : 0.075)),
 									child: NeumorphicText(
 										displayNum.toString(),
 										duration: Duration.zero,

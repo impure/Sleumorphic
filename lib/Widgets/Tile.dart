@@ -7,6 +7,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:sleumorphic/Data/Data.dart';
 import 'package:sleumorphic/Dialogs/StatsDialog.dart';
 import 'package:sleumorphic/Logic/Puzzle.dart';
+import 'package:sleumorphic/Widgets/NeumorphicTile.dart';
 import 'package:state_groups/state_groups.dart';
 import 'package:tools/BasicExtensions.dart';
 
@@ -87,58 +88,11 @@ class TileState extends SyncState<Map<int, DIRECTION_HINT>, Tile> with SingleTic
 					child: SizedBox(
 						height: widget.height,
 						width: widget.width,
-						child: Neumorphic(
-							style: NeumorphicStyle(
-								shape: NeumorphicShape.convex,
-								boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
-								depth: widget.foreground ? 5 : -5,
-								lightSource: LightSource.topLeft,
-								color: themeData.canvasColor,
-								shadowDarkColor: themeData.darkModeEnabled ? Colors.black : Colors.black54,
-								shadowLightColor: themeData.darkModeEnabled ? Colors.white70 : Colors.white,
-							),
-							child: GestureDetector(
-								behavior: HitTestBehavior.translucent,
-								child: SizedBox(
-									height: widget.height,
-									width: widget.width,
-									child: Center(
-										child: Padding(
-											padding: EdgeInsets.symmetric(vertical: widget.width * 0.2, horizontal: widget.height * 0.2),
-											child: AutoSizeText(
-												widget.num.toString(),
-												style: const TextStyle(
-													//color: Colors.white,
-													fontSize: 50,
-													fontWeight: FontWeight.w900,
-													//shadows: <Shadow>[
-													//	Shadow(
-													//		color: shadowColour,
-													//		blurRadius: 10,
-													//	),
-													//],
-												),
-											),
-										),
-									),
-								),
-								onTap: () {
-									if (!widget.foreground) {
-										return;
-									}
-									if (puzzle.solved) {
-										showDialog(
-											context: context,
-											builder: (_) {
-												return const StatsDialog();
-											}
-										);
-										return;
-									}
-									puzzle.trySwapHoleWith(widget.num);
-									puzzle.checkWin(context);
-								},
-							),
+						child: NeumorphicTile(
+							height: widget.height,
+							width: widget.width,
+							num: widget.num,
+							foreground: widget.foreground,
 						),
 					),
 				);

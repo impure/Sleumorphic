@@ -126,7 +126,6 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 								puzzle.invertPieces();
 								boardStateGroup.notifyAll();
 								neumorphicTiles.notifyAll(widget.offset);
-								puzzle.checkWin(context);
 								return;
 							}
 							if (puzzle.solved) {

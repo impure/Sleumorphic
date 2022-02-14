@@ -5,6 +5,7 @@ import 'package:sleumorphic/Data/Data.dart';
 import 'package:sleumorphic/Dialogs/SettingsDialog.dart';
 import 'package:sleumorphic/Dialogs/StatsDialog.dart';
 import 'package:sleumorphic/Logic/Puzzle.dart';
+import 'package:sleumorphic/Widgets/NeumorphicTile.dart';
 import 'package:sleumorphic/Widgets/Tile.dart';
 import 'package:state_groups/state_groups.dart';
 
@@ -66,7 +67,12 @@ class BoardDisplayState extends SyncState<void, BoardDisplay> {
 					);
 					return;
 				}
-				if (key.isKeyPressed(LogicalKeyboardKey.arrowLeft)) {
+				if (key.isKeyPressed(LogicalKeyboardKey.space)) {
+					puzzle.invertPieces();
+					boardStateGroup.notifyAll();
+					final int holeLocation = puzzle.puzzlePieces.indexOf(null);
+					neumorphicTiles.notifyAll(Offset((holeLocation % PUZZLE_WIDTH).toDouble(), (holeLocation ~/ PUZZLE_WIDTH).toDouble()));
+				} else if (key.isKeyPressed(LogicalKeyboardKey.arrowLeft)) {
 					if (!invertControls) {
 						puzzle.trySwapHoleWithLeft();
 					} else {

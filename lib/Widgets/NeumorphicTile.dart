@@ -9,20 +9,21 @@ import 'package:sleumorphic/Dialogs/StatsDialog.dart';
 import 'package:state_groups/state_groups.dart';
 import 'package:tools/BasicExtensions.dart';
 
-StateGroup<void> neumorphicTiles = StateGroup<void>();
+StateGroup<Offset> neumorphicTiles = StateGroup<Offset>();
 
 class NeumorphicTile extends StatefulWidget {
-  const NeumorphicTile({required this.height, required this.width, required this.num, required this.foreground, Key? key}) : super(key: key);
+  const NeumorphicTile({required this.offset, required this.height, required this.width, required this.num, required this.foreground, Key? key}) : super(key: key);
 
   final double height, width;
   final int num;
   final bool foreground;
+  final Offset offset;
 
 	@override
 	NeumorphicTileState createState() => NeumorphicTileState();
 }
 
-class NeumorphicTileState extends SyncState<void, NeumorphicTile> with SingleTickerProviderStateMixin {
+class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleTickerProviderStateMixin {
 
 	NeumorphicTileState() : super(neumorphicTiles);
 
@@ -46,16 +47,19 @@ class NeumorphicTileState extends SyncState<void, NeumorphicTile> with SingleTic
 	*/
 
 	@override
-	void update(_) {
-		_controller.forward(from: 0);
+	void update(Offset? offset) {
+		Future<void>.delayed(Duration(milliseconds: (2 * (widget.offset - offset!).distance).round())).then((_) {
+			_controller.forward(from: 0);
+		});
+
 		super.update(null);
 	}
 
 	@override
 	void initState() {
-		_controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 2000));
+		_controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
 		_controller.value = 0;
-		_animation = Tween<double>(begin: 0, end: 2).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutQuart));
+		_animation = Tween<double>(begin: 0, end: 2).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
 		super.initState();
 	}
 
@@ -110,7 +114,7 @@ class NeumorphicTileState extends SyncState<void, NeumorphicTile> with SingleTic
 						),
 						onTap: () {
 							if (!widget.foreground) {
-								neumorphicTiles.notifyAll();
+								neumorphicTiles.notifyAll(widget.offset);
 								return;
 							}
 							if (puzzle.solved) {

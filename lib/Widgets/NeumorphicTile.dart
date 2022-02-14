@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:sleumorphic/Data/Data.dart';
 import 'package:sleumorphic/Dialogs/StatsDialog.dart';
@@ -67,7 +68,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 		_controller.value = 0;
 		_animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: _controller, curve: Curves.linear));
 		_animation.addListener(() {
-			if (_prevAnimationValue != null && _prevAnimationValue! < 0.5 && _animation.value >= 0.5) {
+			if (_prevAnimationValue != null && _prevAnimationValue! < 0.25 && _animation.value >= 0.25) {
 				displayNum = widget.num;
 			}
 			_prevAnimationValue = _animation.value;
@@ -145,6 +146,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 									padding: EdgeInsets.only(top: max(widget.width, widget.height) * 0.075),
 									child: NeumorphicText(
 										displayNum.toString(),
+										duration: Duration.zero,
 										style: NeumorphicStyle(
 											depth: max(0, widget.foreground ? computeDepth(_animation.value) : -maxDepth),
 											shadowDarkColor: themeData.darkModeEnabled ? Colors.black : Colors.black54,

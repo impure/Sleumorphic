@@ -111,10 +111,11 @@ class Puzzle {
 		return "${requirements.item1.toString().padLeft(2, "0")} ${requirements.item2.toString().padLeft(2, "0")} ${requirements.item3.toString().padLeft(2, "0")} ${requirements.item4.toString().padLeft(2, "0")}";
 	}
 
-	void trySwapHoleWith(int num) {
+	void trySwapHoleWith(Key? key) {
 
-		final int numIndex = puzzlePieces.indexOf(num);
-		final int holeIndex = puzzlePieces.indexOf(null);
+		final int numIndex = keyTranslationLayer!.keys.indexOf(key);
+		final int holeIndex = keyTranslationLayer!.keys.indexOf(null);
+		print("$numIndex $holeIndex");
 
 		void onSuccess() {
 			numMoves++;

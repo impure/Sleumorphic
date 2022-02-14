@@ -12,7 +12,7 @@ import 'package:tools/BasicExtensions.dart';
 StateGroup<Offset> neumorphicTiles = StateGroup<Offset>();
 
 class NeumorphicTile extends StatefulWidget {
-  const NeumorphicTile({required this.offset, required this.height, required this.width, required this.num, required this.foreground, Key? key}) : super(key: key);
+  const NeumorphicTile({required this.offset, required this.height, required this.width, required this.num, required this.foreground, required Key? key}) : super(key: key);
 
   final double height, width;
   final int num;
@@ -137,7 +137,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 								);
 								return;
 							}
-							puzzle.trySwapHoleWith(widget.num);
+							puzzle.trySwapHoleWith(widget.key);
 							puzzle.checkWin(context);
 						},
 					),

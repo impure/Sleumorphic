@@ -1,4 +1,5 @@
 
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
@@ -61,7 +62,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 	void initState() {
 		_controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
 		_controller.value = 0;
-		_animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+		_animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: _controller, curve: Curves.linear));
 		_animation.addListener(() {
 			if (_prevAnimationValue != null && _prevAnimationValue! < 0.5 && _animation.value >= 0.5) {
 				displayNum = widget.num;
@@ -77,6 +78,10 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 		_controller.dispose();
 		super.dispose();
 	}
+	
+	double computeDepth(double animationValue) {
+		return max(1 - Curves.easeOutExpo.transform(animationValue) * 2, Curves.easeInExpo.transform(animationValue) * 2 - 1) * 5;
+	}
 
 	@override
 	Widget build(BuildContext context) {
@@ -90,7 +95,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 					style: NeumorphicStyle(
 						shape: NeumorphicShape.convex,
 						boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
-						depth: widget.foreground ? (1 - _animation.value * 2).abs() * 5 : -5,
+						depth: widget.foreground ? computeDepth(_animation.value) : -5,
 						lightSource: LightSource.topLeft,
 						color: themeData.canvasColor,
 						shadowDarkColor: themeData.darkModeEnabled ? Colors.black : Colors.black54,

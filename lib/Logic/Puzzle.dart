@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:binary_codec/binary_codec.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sleumorphic/Data/Data.dart';
@@ -71,7 +72,7 @@ class Puzzle {
 		required this.isBoosted,
 	});
 
-	List<int?> backPuzzlePieces = <int?>[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ];
+	List<int> backPuzzlePieces = <int>[ 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 ];
 	List<int?> puzzlePieces = <int?>[];
 	int numMoves = 0;
 	int numChecks = 0;
@@ -88,6 +89,16 @@ class Puzzle {
 	bool get solved {
 		print("TODO: solved()");
 		return false;
+	}
+
+	void swapPieces() {
+		for (int i = 0; i < puzzlePieces.length; i++) {
+			if (puzzlePieces[i] != null) {
+				final int tempValue = backPuzzlePieces[i];
+				backPuzzlePieces[i] = puzzlePieces[i]!;
+				puzzlePieces[i] = tempValue;
+			}
+		}
 	}
 
 	String getRequirements(Tuple4<int, int, int, int> requirements) {

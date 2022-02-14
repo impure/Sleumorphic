@@ -30,7 +30,7 @@ class BoardDisplayState extends SyncState<void, BoardDisplay> {
 				cells.add(Container());
 			} else {
 				cells.add(Tile.fromIndices(
-						puzzle.backPuzzlePieces[i]!,
+						puzzle.backPuzzlePieces[i],
 						(widget.gridSize / PUZZLE_WIDTH) - PADDING_SIZE,
 						(widget.gridSize / PUZZLE_HEIGHT) - PADDING_SIZE,
 						i % PUZZLE_WIDTH, i ~/ PUZZLE_WIDTH,

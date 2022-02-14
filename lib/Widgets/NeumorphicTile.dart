@@ -80,7 +80,11 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 	}
 	
 	double computeDepth(double animationValue) {
-		return max(1 - Curves.easeOutExpo.transform(animationValue) * 2, Curves.easeInExpo.transform(animationValue) * 2 - 1) * 5;
+		return max(1 - Curves.easeOutExpo.transform(animationValue) * 2, Curves.easeInExpo.transform(animationValue) * 2 - 1) * maxDepth;
+	}
+
+	double get maxDepth {
+		return max(widget.width, widget.width) * 0.05;
 	}
 
 	@override
@@ -95,7 +99,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 					style: NeumorphicStyle(
 						shape: NeumorphicShape.convex,
 						boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
-						depth: widget.foreground ? computeDepth(_animation.value) : -5,
+						depth: widget.foreground ? computeDepth(_animation.value) : -maxDepth,
 						lightSource: LightSource.topLeft,
 						color: themeData.canvasColor,
 						shadowDarkColor: themeData.darkModeEnabled ? Colors.black : Colors.black54,

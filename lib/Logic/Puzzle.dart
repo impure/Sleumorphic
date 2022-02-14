@@ -77,7 +77,7 @@ class Puzzle {
 		required this.keyTranslationLayer,
 	});
 
-	List<int> backPuzzlePieces = <int>[ 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 ];
+	List<int> backPuzzlePieces = <int>[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ];
 	List<int?> puzzlePieces = <int?>[];
 	int numMoves = 0;
 	int numChecks = 0;
@@ -109,12 +109,6 @@ class Puzzle {
 
 	String getRequirements(Tuple4<int, int, int, int> requirements) {
 		return "${requirements.item1.toString().padLeft(2, "0")} ${requirements.item2.toString().padLeft(2, "0")} ${requirements.item3.toString().padLeft(2, "0")} ${requirements.item4.toString().padLeft(2, "0")}";
-	}
-
-	void trySwapHoleWithIndex(int index) {
-		if (index >= 0 && index < puzzlePieces.length) {
-			trySwapHoleWith(puzzlePieces[index]!);
-		}
 	}
 
 	void trySwapHoleWith(int num) {
@@ -159,22 +153,6 @@ class Puzzle {
 				}
 			);
 		}
-	}
-
-	void trySwapHoleWithLeft() {
-		trySwapHoleWithIndex(puzzlePieces.indexOf(null) - 1);
-	}
-
-	void trySwapHoleWithUp() {
-		trySwapHoleWithIndex(puzzlePieces.indexOf(null) - PUZZLE_WIDTH);
-	}
-
-	void trySwapHoleWithRight() {
-		trySwapHoleWithIndex(puzzlePieces.indexOf(null) + 1);
-	}
-
-	void trySwapHoleWithDown() {
-		trySwapHoleWithIndex(puzzlePieces.indexOf(null) + PUZZLE_WIDTH);
 	}
 
 	Map<int, dynamic> toMap() {

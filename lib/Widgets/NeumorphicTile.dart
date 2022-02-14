@@ -80,7 +80,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 	}
 	
 	double computeDepth(double animationValue) {
-		return max(1 - Curves.easeOutExpo.transform(animationValue) * 2, Curves.easeInExpo.transform(animationValue) * 2 - 1) * maxDepth;
+		return max(1 - Curves.easeOutExpo.transform(animationValue) * 2, Curves.easeIn.transform(animationValue) * 2 - 1) * maxDepth;
 	}
 
 	double get maxDepth {

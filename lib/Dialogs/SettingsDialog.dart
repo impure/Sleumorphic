@@ -22,6 +22,7 @@ class SettingsDialogState extends State<SettingsDialog> {
 			content: Column(
 				mainAxisSize: MainAxisSize.min,
 				children: <Widget>[
+					const Text("Move tiles: arrow keys\nFlip board: space bar"),
 					const SizedBox(height: 20),
 					SwitchListTile(
 						title: const Text("Invert Keyboard Controls"),

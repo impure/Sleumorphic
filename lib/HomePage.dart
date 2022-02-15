@@ -53,40 +53,23 @@ class HomePageState extends State<HomePage> {
 	Widget gameBoard(bool darkModeEnabled, double gridSize) {
 		return Column(
 			children: <Widget>[
-				NeumorphicText(
+				Text(
 					"#FlutterPuzzleHack",
-					textStyle: NeumorphicTextStyle(
-						fontSize: 50,
-					),
-					style: NeumorphicStyle(
-						color: darkModeEnabled ? null : const Color.fromRGBO(75, 75, 75, 1),
-						shape: NeumorphicShape.convex,
-						lightSource: LightSource.topLeft,
-						shadowDarkColor: darkModeEnabled ? Colors.black : Colors.black54,
-						shadowLightColor: darkModeEnabled ? Colors.white70 : Colors.white,
-					),
+
 				),
 				const SizedBox(height: 20),
-				NeumorphicText(
+				Text(
 					"Moves: ?? - Inversions: ??",
-					textStyle: NeumorphicTextStyle(
-						fontSize: 20,
-					),
-					style: NeumorphicStyle(
-						color: darkModeEnabled ? null : const Color.fromRGBO(75, 75, 75, 1),
-						shape: NeumorphicShape.convex,
-						lightSource: LightSource.topLeft,
-						shadowDarkColor: darkModeEnabled ? Colors.black : Colors.black54,
-						shadowLightColor: darkModeEnabled ? Colors.white70 : Colors.white,
-					),
 				),
 				const SizedBox(height: 20),
 				BoardDisplay(gridSize),
 				const SizedBox(height: 20),
 				Row(
 					children: <Widget>[
-						GestureDetector(
-							onTap: () {
+						IconButton(
+							tooltip: "Settings",
+							iconSize: 60,
+							onPressed: () {
 								showDialog(
 									context: context,
 									builder: (_) {
@@ -94,40 +77,26 @@ class HomePageState extends State<HomePage> {
 									}
 								);
 							},
-							child: NeumorphicIcon(
+							icon: const Icon(
 								Icons.settings,
-								size: 60,
-								style: NeumorphicStyle(
-									color: darkModeEnabled ? null : const Color.fromRGBO(75, 75, 75, 1),
-									shape: NeumorphicShape.convex,
-									lightSource: LightSource.topLeft,
-									shadowDarkColor: darkModeEnabled ? Colors.black : Colors.black54,
-									shadowLightColor: darkModeEnabled ? Colors.white70 : Colors.white,
-								),
 							),
 						),
 						const SizedBox(width: 20),
-						GestureDetector(
-							onTap: () {
+						IconButton(
+							tooltip: "Invert",
+							iconSize: 60,
+							onPressed: () {
 								puzzle.invertPieces();
 								boardStateGroup.notifyAll();
 								final int holeLocation = puzzle.puzzlePieces.indexOf(null);
 								neumorphicTiles.notifyAll(Offset((holeLocation % PUZZLE_WIDTH).toDouble(), (holeLocation ~/ PUZZLE_WIDTH).toDouble()));
 							},
-							child: NeumorphicIcon(
+							icon: const Icon(
 								Icons.flip_camera_android, // Icons.flip_to_front
-								size: 60,
-								style: NeumorphicStyle(
-									color: darkModeEnabled ? null : const Color.fromRGBO(75, 75, 75, 1),
-									shape: NeumorphicShape.convex,
-									lightSource: LightSource.topLeft,
-									shadowDarkColor: darkModeEnabled ? Colors.black : Colors.black54,
-									shadowLightColor: darkModeEnabled ? Colors.white70 : Colors.white,
-								),
 							),
 						),
 					],
-				)
+				),
 			],
 		);
 		/*

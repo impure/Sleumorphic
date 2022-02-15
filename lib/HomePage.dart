@@ -59,16 +59,7 @@ class HomePageState extends State<HomePage> {
 				const SizedBox(height: 5),
 				const Text(
 					"#FlutterPuzzleHack",
-					style: TextStyle(
-						fontSize: 45,
-						shadows: <Shadow>[
-							Shadow(
-								offset: Offset(5, 5),
-								color: Colors.black,
-								blurRadius: 5,
-							)
-						]
-					),
+					style: TextStyle(fontSize: 45),
 				),
 				const SizedBox(height: 10),
 				const StatsDisplay(),
@@ -87,20 +78,8 @@ class HomePageState extends State<HomePage> {
 									},
 								);
 							},
-							icon: Container(
-								decoration: const BoxDecoration(
-										shape: BoxShape.circle,
-										boxShadow: <BoxShadow>[
-											BoxShadow(
-												offset: Offset(3, 3),
-												color: Colors.black38,
-												blurRadius: 5.0,
-											),
-										]
-								),
-								child: const Icon(
-									Icons.settings
-								),
+							icon: const Icon(
+								Icons.settings,
 							),
 						),
 						const SizedBox(width: 20),
@@ -114,20 +93,8 @@ class HomePageState extends State<HomePage> {
 								final int holeLocation = puzzle.puzzlePieces.indexOf(null);
 								neumorphicTiles.notifyAll(Offset((holeLocation % PUZZLE_WIDTH).toDouble(), (holeLocation ~/ PUZZLE_WIDTH).toDouble()));
 							},
-							icon: Container(
-								decoration: const BoxDecoration(
-									shape: BoxShape.circle,
-									boxShadow: <BoxShadow>[
-										BoxShadow(
-											offset: Offset(3, 3),
-											color: Colors.black38,
-											blurRadius: 5.0,
-										),
-									]
-								),
-								child: const Icon(
-									Icons.flip_camera_android, // Icons.flip_to_front
-								),
+							icon: const Icon(
+								Icons.flip_camera_android, // Icons.flip_to_front
 							),
 						),
 					],

@@ -17,8 +17,8 @@ enum DIRECTION_HINT {
 	BOTH,
 }
 
-const int PUZZLE_WIDTH = 4;
-const int PUZZLE_HEIGHT = 4;
+const int PUZZLE_WIDTH = 3;
+const int PUZZLE_HEIGHT = 3;
 
 class Puzzle {
 
@@ -31,8 +31,17 @@ class Puzzle {
 
 		final Random rng = Random();
 
-		backPuzzlePieces = <int>[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ];
-		puzzlePieces = <int?>[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, null ];
+		backPuzzlePieces.clear();
+		puzzlePieces.clear();
+
+		for (int i = 1; i <= PUZZLE_WIDTH * PUZZLE_HEIGHT; i++) {
+			backPuzzlePieces.add(i);
+			if (i != PUZZLE_HEIGHT * PUZZLE_WIDTH) {
+				puzzlePieces.add(i);
+			} else {
+				puzzlePieces.add(null);
+			}
+		}
 
 		// Get end state
 		simulateRandomSwaps(100, rng, keepGoing: () {

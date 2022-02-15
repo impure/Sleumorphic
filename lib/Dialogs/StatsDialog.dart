@@ -18,6 +18,7 @@ class StatsDialogState extends State<StatsDialog> {
 			title: Center(
 				child: Text(puzzle.solved ? "Congratulations!" : "Statistics"),
 			),
+			content: Text("Moves: ${puzzle.numMoves}, Inverts: ${puzzle.numInverts}"),
 			actions: <Widget>[
 				TextButton(
 					child: Text("SHUFFLE", style: Theme.of(context).textTheme.bodyText1),

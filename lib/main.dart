@@ -24,8 +24,37 @@ class MyApp extends StatelessWidget {
 	@override
 	Widget build(BuildContext context) {
 		return MaterialApp(
-			theme: ThemeData().copyWith(scaffoldBackgroundColor: const Color(0xffCCCCCC), canvasColor: const Color.fromRGBO(200, 200, 200, 1)),
-			darkTheme: ThemeData.dark(),
+			theme: ThemeData(
+				primarySwatch: MaterialColor(0xff303030, <int, Color>{
+					50 : const Color(0xff303030).withOpacity(0.1),
+					100 : const Color(0xff303030).withOpacity(0.2),
+					200 : const Color(0xff303030).withOpacity(0.3),
+					300 : const Color(0xff303030).withOpacity(0.4),
+					400 : const Color(0xff303030).withOpacity(0.5),
+					500 : const Color(0xff303030).withOpacity(0.6),
+					600 : const Color(0xff303030).withOpacity(0.7),
+					700 : const Color(0xff303030).withOpacity(0.8),
+					800 : const Color(0xff303030).withOpacity(0.9),
+					900 : const Color(0xff303030),
+				}),
+				scaffoldBackgroundColor: const Color(0xffCCCCCC),
+				canvasColor: const Color.fromRGBO(200, 200, 200, 1),
+			),
+			darkTheme: ThemeData(
+				brightness: Brightness.dark,
+				primarySwatch: MaterialColor(0xffc8c8c8, <int, Color>{
+					50 : const Color(0xffc8c8c8).withOpacity(0.1),
+					100 : const Color(0xffc8c8c8).withOpacity(0.2),
+					200 : const Color(0xffc8c8c8).withOpacity(0.3),
+					300 : const Color(0xffc8c8c8).withOpacity(0.4),
+					400 : const Color(0xffc8c8c8).withOpacity(0.5),
+					500 : const Color(0xffc8c8c8).withOpacity(0.6),
+					600 : const Color(0xffc8c8c8).withOpacity(0.7),
+					700 : const Color(0xffc8c8c8).withOpacity(0.8),
+					800 : const Color(0xffc8c8c8).withOpacity(0.9),
+					900 : const Color(0xffc8c8c8),
+				}),
+			),
 			home: const LoadingPage(),
 		);
 	}

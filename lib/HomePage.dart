@@ -57,6 +57,7 @@ class HomePageState extends State<HomePage> {
 				const StatsDisplay(),
 				const SizedBox(height: 20),
 				Row(
+					mainAxisSize: MainAxisSize.min,
 					children: <Widget>[
 						IconButton(
 							tooltip: "Settings",

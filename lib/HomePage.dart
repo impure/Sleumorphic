@@ -10,6 +10,7 @@ import 'package:sleumorphic/Dialogs/SettingsDialog.dart';
 import 'package:sleumorphic/Logic/Puzzle.dart';
 import 'package:sleumorphic/Widgets/BoardDisplay.dart';
 import 'package:sleumorphic/Widgets/NeumorphicTile.dart';
+import 'package:sleumorphic/Widgets/StatsDisplay.dart';
 import 'package:tools/BasicExtensions.dart';
 import 'package:tools/Startup.dart';
 
@@ -58,11 +59,8 @@ class HomePageState extends State<HomePage> {
 					"#FlutterPuzzleHack",
 					style: TextStyle(fontSize: 45),
 				),
-				const SizedBox(height: 20),
-				const AutoSizeText(
-					"Moves: ?? - Inversions: ??",
-					style: TextStyle(fontSize: 20),
-				),
+				const SizedBox(height: 10),
+				const StatsDisplay(),
 				const SizedBox(height: 20),
 				BoardDisplay(gridSize),
 				const SizedBox(height: 20),

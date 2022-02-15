@@ -26,7 +26,7 @@ class Puzzle {
 	// start sorted and then apply random shuffles
 	Puzzle() {
 		numMoves = 0;
-		numChecks = 0;
+		numInverts = 0;
 		shareInfo.clear();
 
 		final Random rng = Random();
@@ -58,7 +58,7 @@ class Puzzle {
 
 		return Puzzle._(
 			numMoves: data[Data.NUM_MOVES.index],
-			numChecks: data[Data.NUM_CHECKS.index],
+			numInverts: data[Data.NUM_CHECKS.index],
 			puzzlePieces: List<int?>.from(data[Data.PUZZLE_PIECES.index]),
 			isBoosted: (data[Data.MAX_CHECKS_DEPRECATED.index] != null && data[Data.MAX_CHECKS_DEPRECATED.index] >= 6) || data[Data.IS_BOOSTED.index] == true,
 			shareInfo: StringBuffer(data[Data.SHARE_INFO.index]),
@@ -68,7 +68,7 @@ class Puzzle {
 
 	Puzzle._({
 		required this.numMoves,
-		required this.numChecks,
+		required this.numInverts,
 		required this.puzzlePieces,
 		required this.shareInfo,
 		required this.isBoosted,
@@ -78,7 +78,7 @@ class Puzzle {
 	List<int> backPuzzlePieces = <int>[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ];
 	List<int?> puzzlePieces = <int?>[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, null ];
 	int numMoves = 0;
-	int numChecks = 0;
+	int numInverts = 0;
 	bool isBoosted = false;
 	TileKeyTranslationLayer? keyTranslationLayer;
 
@@ -162,6 +162,8 @@ class Puzzle {
 	}
 
 	void invertPieces() {
+		numInverts++;
+		statDisplayStateGroup.notifyAll();
 		for (int i = 0; i < puzzlePieces.length; i++) {
 			if (puzzlePieces[i] != null) {
 				final int tempValue = backPuzzlePieces[i];
@@ -245,16 +247,6 @@ class Puzzle {
 				}
 			);
 		}
-	}
-
-	Map<int, dynamic> toMap() {
-		return <int, dynamic> {
-			Data.PUZZLE_PIECES.index : puzzlePieces,
-			Data.NUM_MOVES.index : numMoves,
-			Data.NUM_CHECKS.index : numChecks,
-			Data.SHARE_INFO.index : shareInfo.toString(),
-			Data.IS_BOOSTED.index : isBoosted,
-		};
 	}
 
 	void checkScheduledSave(DateTime now) {

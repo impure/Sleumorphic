@@ -21,8 +21,8 @@ class StatsDisplayState extends SyncState<void, StatsDisplay> {
 			children: <InlineSpan>[
 				TextSpan(text: puzzle.numMoves.toString(), style: const TextStyle(fontWeight: FontWeight.bold)),
 				const TextSpan(text: " Moves | "),
-				TextSpan(text: puzzle.numChecks.toString(), style: const TextStyle(fontWeight: FontWeight.bold)),
-				const TextSpan(text: " Checks"),
+				TextSpan(text: puzzle.numInverts.toString(), style: const TextStyle(fontWeight: FontWeight.bold)),
+				const TextSpan(text: " Inverts"),
 			]
 		));
 	}

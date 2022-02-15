@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:sleumorphic/Dialogs/InstructionsDialog.dart';
 import 'package:sleumorphic/Widgets/BoardDisplay.dart';
 import 'package:tools/BasicExtensions.dart';
@@ -47,7 +48,7 @@ class HomePageState extends State<HomePage> {
 					child: SingleChildScrollView(
 						scrollDirection: Axis.horizontal,
 						child: SingleChildScrollView(
-							child: gameBoard(gridSize),
+							child: gameBoard(darkModeEnabled, gridSize),
 						),
 					)
 				),
@@ -55,8 +56,51 @@ class HomePageState extends State<HomePage> {
 		);
 	}
 
-	Widget gameBoard(double gridSize) {
-		return BoardDisplay(gridSize);
+	Widget gameBoard(bool darkModeEnabled, double gridSize) {
+		return Column(
+			children: <Widget>[
+				NeumorphicText(
+					"#FlutterPuzzleHack",
+					textStyle: NeumorphicTextStyle(
+						fontSize: 50,
+					),
+					style: NeumorphicStyle(
+						shape: NeumorphicShape.convex,
+						lightSource: LightSource.topLeft,
+						shadowDarkColor: darkModeEnabled ? Colors.black : Colors.black54,
+						shadowLightColor: darkModeEnabled ? Colors.white70 : Colors.white,
+					),
+				),NeumorphicText(
+					"Moves: ?? - Inversions: ??",
+					textStyle: NeumorphicTextStyle(
+						fontSize: 20,
+					),
+					style: NeumorphicStyle(
+						shape: NeumorphicShape.convex,
+						lightSource: LightSource.topLeft,
+						shadowDarkColor: darkModeEnabled ? Colors.black : Colors.black54,
+						shadowLightColor: darkModeEnabled ? Colors.white70 : Colors.white,
+					),
+				),
+				BoardDisplay(gridSize),
+				Row(
+					children: <Widget>[
+						GestureDetector(
+							child: NeumorphicIcon(
+								Icons.settings,
+								size: 60,
+								style: NeumorphicStyle(
+									shape: NeumorphicShape.convex,
+									lightSource: LightSource.topLeft,
+									shadowDarkColor: darkModeEnabled ? Colors.black : Colors.black54,
+									shadowLightColor: darkModeEnabled ? Colors.white70 : Colors.white,
+								),
+							),
+						),
+					],
+				)
+			],
+		);
 		/*
 		return Container(
 			padding: EdgeInsets.only(left: gridSize * 0.1, top: gridSize * 0.05, bottom: gridSize * 0.05, right: gridSize * 0.05),

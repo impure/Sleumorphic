@@ -104,7 +104,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 								lightSource: LightSource.topLeft,
 								color: themeData.canvasColor,
 								shadowDarkColor: themeData.darkModeEnabled ? Colors.black : Colors.black54,
-								shadowLightColor: themeData.darkModeEnabled ? Colors.white70 : Colors.white,
+								shadowLightColor: themeData.darkModeEnabled ? Colors.white70 : Colors.white.withOpacity(0.9),
 							),
 							child: GestureDetector(
 								behavior: HitTestBehavior.translucent,

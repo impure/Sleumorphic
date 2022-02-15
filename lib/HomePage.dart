@@ -66,6 +66,7 @@ class HomePageState extends State<HomePage> {
 						fontSize: 50,
 					),
 					style: NeumorphicStyle(
+						color: darkModeEnabled ? null : const Color.fromRGBO(50, 50, 50, 1),
 						shape: NeumorphicShape.convex,
 						lightSource: LightSource.topLeft,
 						shadowDarkColor: darkModeEnabled ? Colors.black : Colors.black54,
@@ -79,6 +80,7 @@ class HomePageState extends State<HomePage> {
 						fontSize: 20,
 					),
 					style: NeumorphicStyle(
+						color: darkModeEnabled ? null : const Color.fromRGBO(50, 50, 50, 1),
 						shape: NeumorphicShape.convex,
 						lightSource: LightSource.topLeft,
 						shadowDarkColor: darkModeEnabled ? Colors.black : Colors.black54,
@@ -103,6 +105,7 @@ class HomePageState extends State<HomePage> {
 								Icons.settings,
 								size: 60,
 								style: NeumorphicStyle(
+									color: darkModeEnabled ? null : const Color.fromRGBO(50, 50, 50, 1),
 									shape: NeumorphicShape.convex,
 									lightSource: LightSource.topLeft,
 									shadowDarkColor: darkModeEnabled ? Colors.black : Colors.black54,
@@ -117,6 +120,7 @@ class HomePageState extends State<HomePage> {
 								Icons.info_outline,
 								size: 60,
 								style: NeumorphicStyle(
+									color: darkModeEnabled ? null : const Color.fromRGBO(50, 50, 50, 1),
 									shape: NeumorphicShape.convex,
 									lightSource: LightSource.topLeft,
 									shadowDarkColor: darkModeEnabled ? Colors.black : Colors.black54,

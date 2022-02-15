@@ -56,62 +56,58 @@ class HomePageState extends State<HomePage> {
 		return Column(
 			children: <Widget>[
 				SizedBox(
-					height: gridSize * 0.3,
+					height: gridSize * 0.35,
 					child: FittedBox(
-						child: Center(
-							child: Column(
-								children: const <Widget>[
-									Text(
-										"#FlutterPuzzleHack",
-										style: TextStyle(fontSize: 45),
-									),
-									SizedBox(height: 10),
-									StatsDisplay(),
-									SizedBox(height: 20),
-								],
-							),
+						child: Column(
+							children: const <Widget>[
+								Text(
+									"#FlutterPuzzleHack",
+									style: TextStyle(fontSize: 45),
+								),
+								SizedBox(height: 10),
+								StatsDisplay(),
+								SizedBox(height: 20),
+							],
 						),
 					),
 				),
 				BoardDisplay(gridSize),
 				const SizedBox(height: 20),
 				SizedBox(
-					height: gridSize * 0.2,
+					height: gridSize * 0.15,
 					child: FittedBox(
-						child: Center(
-							child: Row(
-								children: <Widget>[
-									IconButton(
-										tooltip: "Settings",
-										iconSize: 60,
-										onPressed: () {
-											showDialog(
-													context: context,
-													builder: (_) {
-														return const SettingsDialog();
-													}
-											);
-										},
-										icon: const Icon(
-											Icons.settings,
-										),
+						child: Row(
+							children: <Widget>[
+								IconButton(
+									tooltip: "Settings",
+									iconSize: 60,
+									onPressed: () {
+										showDialog(
+												context: context,
+												builder: (_) {
+													return const SettingsDialog();
+												}
+										);
+									},
+									icon: const Icon(
+										Icons.settings,
 									),
-									const SizedBox(width: 20),
-									IconButton(
-										tooltip: "Invert",
-										iconSize: 60,
-										onPressed: () {
-											puzzle.invertPieces();
-											boardStateGroup.notifyAll();
-											final int holeLocation = puzzle.puzzlePieces.indexOf(null);
-											neumorphicTiles.notifyAll(Offset((holeLocation % PUZZLE_WIDTH).toDouble(), (holeLocation ~/ PUZZLE_WIDTH).toDouble()));
-										},
-										icon: const Icon(
-											Icons.flip_camera_android, // Icons.flip_to_front
-										),
+								),
+								const SizedBox(width: 20),
+								IconButton(
+									tooltip: "Invert",
+									iconSize: 60,
+									onPressed: () {
+										puzzle.invertPieces();
+										boardStateGroup.notifyAll();
+										final int holeLocation = puzzle.puzzlePieces.indexOf(null);
+										neumorphicTiles.notifyAll(Offset((holeLocation % PUZZLE_WIDTH).toDouble(), (holeLocation ~/ PUZZLE_WIDTH).toDouble()));
+									},
+									icon: const Icon(
+										Icons.flip_camera_android, // Icons.flip_to_front
 									),
-								],
-							),
+								),
+							],
 						),
 					),
 				),

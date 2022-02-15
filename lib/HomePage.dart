@@ -47,9 +47,9 @@ class HomePageState extends State<HomePage> {
 		return Scaffold(
 			body: SafeArea(
 				child: Center(
-					child: size.height > size.width ? gameBoardPortrait(darkModeEnabled, gridSize) : gameBoardLandscape(darkModeEnabled, gridSize),
+					child: size.height > size.width * 0.8 ? gameBoardPortrait(darkModeEnabled, gridSize) : gameBoardLandscape(darkModeEnabled, gridSize),
 				),
-			)
+			),
 		);
 	}
 
@@ -72,7 +72,7 @@ class HomePageState extends State<HomePage> {
 			children: <Widget>[
 				IconButton(
 					tooltip: "Settings",
-					iconSize: 60,
+					iconSize: 50,
 					onPressed: () {
 						showDialog(
 							context: context,
@@ -88,7 +88,7 @@ class HomePageState extends State<HomePage> {
 				const SizedBox(width: 20),
 				IconButton(
 					tooltip: "Invert",
-					iconSize: 60,
+					iconSize: 50,
 					onPressed: () {
 						puzzle.invertPieces();
 						boardStateGroup.notifyAll();
@@ -106,6 +106,11 @@ class HomePageState extends State<HomePage> {
 	Widget gameBoardLandscape(bool darkModeEnabled, double gridSize) {
 		return Row(
 			children: <Widget>[
+				const Flexible(
+					fit: FlexFit.tight,
+					flex: 1,
+					child: SizedBox(),
+				),
 				SizedBox(
 					width: gridSize,
 					child: FittedBox(
@@ -117,8 +122,24 @@ class HomePageState extends State<HomePage> {
 						),
 					),
 				),
-				SizedBox(width: 50),
-				BoardDisplay(gridSize),
+				const Flexible(
+					fit: FlexFit.tight,
+					flex: 1,
+					child: SizedBox(),
+				),
+				Column(
+					mainAxisAlignment: MainAxisAlignment.center,
+					children: <Widget>[
+						Center(
+							child: BoardDisplay(gridSize),
+						),
+					],
+				),
+				const Flexible(
+					fit: FlexFit.tight,
+					flex: 1,
+					child: SizedBox(),
+				),
 			],
 		);
 	}

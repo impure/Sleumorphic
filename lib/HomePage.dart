@@ -1,6 +1,7 @@
 
 import 'dart:math';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -53,13 +54,14 @@ class HomePageState extends State<HomePage> {
 	Widget gameBoard(bool darkModeEnabled, double gridSize) {
 		return Column(
 			children: <Widget>[
-				Text(
+				const AutoSizeText(
 					"#FlutterPuzzleHack",
-
+					style: TextStyle(fontSize: 45),
 				),
 				const SizedBox(height: 20),
-				Text(
+				const AutoSizeText(
 					"Moves: ?? - Inversions: ??",
+					style: TextStyle(fontSize: 20),
 				),
 				const SizedBox(height: 20),
 				BoardDisplay(gridSize),

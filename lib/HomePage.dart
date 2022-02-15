@@ -38,78 +38,136 @@ class HomePageState extends State<HomePage> {
 		final Size size = MediaQuery.of(context).size;
 		final double gridSize = min(min(800, size.width * 4 / 5), size.height * 3.5 / 6);
 
+		if (size.height > size.width) {
+
+		} else {
+
+		}
+
 		return Scaffold(
 			body: SafeArea(
 				child: Center(
-					child: SingleChildScrollView(
-						scrollDirection: Axis.horizontal,
-						child: SingleChildScrollView(
-							child: gameBoard(darkModeEnabled, gridSize),
-						),
-					)
+					child: size.height > size.width ? gameBoardPortrait(darkModeEnabled, gridSize) : gameBoardLandscape(darkModeEnabled, gridSize),
 				),
 			)
 		);
 	}
 
-	Widget gameBoard(bool darkModeEnabled, double gridSize) {
+	Widget topWidgets() {
 		return Column(
+			children: const <Widget>[
+				Text(
+					"#FlutterPuzzleHack",
+					style: TextStyle(fontSize: 45),
+				),
+				SizedBox(height: 10),
+				StatsDisplay(),
+				SizedBox(height: 20),
+			],
+		);
+	}
+
+	Widget bottomWidgets() {
+		return Row(
+			children: <Widget>[
+				IconButton(
+					tooltip: "Settings",
+					iconSize: 60,
+					onPressed: () {
+						showDialog(
+							context: context,
+							builder: (_) {
+								return const SettingsDialog();
+							}
+						);
+					},
+					icon: const Icon(
+						Icons.settings,
+					),
+				),
+				const SizedBox(width: 20),
+				IconButton(
+					tooltip: "Invert",
+					iconSize: 60,
+					onPressed: () {
+						puzzle.invertPieces();
+						boardStateGroup.notifyAll();
+						final int holeLocation = puzzle.puzzlePieces.indexOf(null);
+						neumorphicTiles.notifyAll(Offset((holeLocation % PUZZLE_WIDTH).toDouble(), (holeLocation ~/ PUZZLE_WIDTH).toDouble()));
+					},
+					icon: const Icon(
+						Icons.flip_camera_android, // Icons.flip_to_front
+					),
+				),
+			],
+		);
+	}
+	
+	Widget gameBoardLandscape(bool darkModeEnabled, double gridSize) {
+		return Row(
 			children: <Widget>[
 				SizedBox(
-					height: gridSize * 0.35,
+					width: gridSize,
 					child: FittedBox(
 						child: Column(
-							children: const <Widget>[
-								Text(
-									"#FlutterPuzzleHack",
-									style: TextStyle(fontSize: 45),
-								),
-								SizedBox(height: 10),
-								StatsDisplay(),
-								SizedBox(height: 20),
+							children: <Widget>[
+								topWidgets(),
+								bottomWidgets(),
 							],
 						),
 					),
 				),
+				SizedBox(width: 50),
 				BoardDisplay(gridSize),
-				const SizedBox(height: 20),
-				SizedBox(
-					height: gridSize * 0.15,
+			],
+		);
+	}
+
+	Widget gameBoardPortrait(bool darkModeEnabled, double gridSize) {
+		return Column(
+			children: <Widget>[
+				const Flexible(
+					fit: FlexFit.tight,
+					flex: 1,
+					child: SizedBox(),
+				),
+				Flexible(
+					fit: FlexFit.tight,
+					flex: 5,
 					child: FittedBox(
-						child: Row(
-							children: <Widget>[
-								IconButton(
-									tooltip: "Settings",
-									iconSize: 60,
-									onPressed: () {
-										showDialog(
-												context: context,
-												builder: (_) {
-													return const SettingsDialog();
-												}
-										);
-									},
-									icon: const Icon(
-										Icons.settings,
-									),
-								),
-								const SizedBox(width: 20),
-								IconButton(
-									tooltip: "Invert",
-									iconSize: 60,
-									onPressed: () {
-										puzzle.invertPieces();
-										boardStateGroup.notifyAll();
-										final int holeLocation = puzzle.puzzlePieces.indexOf(null);
-										neumorphicTiles.notifyAll(Offset((holeLocation % PUZZLE_WIDTH).toDouble(), (holeLocation ~/ PUZZLE_WIDTH).toDouble()));
-									},
-									icon: const Icon(
-										Icons.flip_camera_android, // Icons.flip_to_front
-									),
-								),
-							],
-						),
+						child: topWidgets(),
 					),
+				),
+				const Flexible(
+					fit: FlexFit.tight,
+					flex: 1,
+					child: SizedBox(),
+				),
+				BoardDisplay(gridSize),
+				const Flexible(
+					fit: FlexFit.tight,
+					flex: 1,
+					child: SizedBox(),
+				),
+				Flexible(
+					fit: FlexFit.tight,
+					flex: 2,
+					child: FittedBox(
+						child: Padding(
+							padding: const EdgeInsets.symmetric(horizontal: 50),
+							child: SizedBox(
+								height: gridSize * 0.15,
+								child: FittedBox(
+									child: bottomWidgets(),
+								),
+							),
+						)
+					),
+				),
+				const Flexible(
+					fit: FlexFit.tight,
+					flex: 1,
+					child: SizedBox(),
 				),
 			],
 		);

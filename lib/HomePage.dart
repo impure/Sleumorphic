@@ -60,7 +60,7 @@ class HomePageState extends State<HomePage> {
 				),
 				SizedBox(height: 10),
 				StatsDisplay(),
-				SizedBox(height: 20),
+				SizedBox(height: 10),
 			],
 		);
 	}
@@ -156,7 +156,7 @@ class HomePageState extends State<HomePage> {
 					child: SizedBox(
 						width: gridSize,
 						child: Padding(
-							padding: EdgeInsets.symmetric(horizontal: 20),
+							padding: const EdgeInsets.symmetric(horizontal: 20),
 							child: FittedBox(
 								child: topWidgets(),
 							),

@@ -34,7 +34,15 @@ class HomePageState extends State<HomePage> {
 		SystemChrome.setSystemUIOverlayStyle(darkModeEnabled ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark);
 
 		final Size size = MediaQuery.of(context).size;
-		final double gridSize = min(min(800, size.width * 4 / 5), size.height * 3.5 / 6);
+		double gridSize = 800;
+
+		if (size.height > size.width * 0.8) {
+			// Portrait
+			gridSize = min(min(800, size.width * 4 / 5), size.height * 3.5 / 6);
+		} else {
+			// Landscape
+			gridSize = min(min(800, size.width * 2.5 / 5), size.height * 5 / 6);
+		}
 
 		return Scaffold(
 			body: SafeArea(
@@ -104,7 +112,7 @@ class HomePageState extends State<HomePage> {
 					child: SizedBox(),
 				),
 				SizedBox(
-					width: gridSize,
+					width: gridSize * 0.75,
 					child: FittedBox(
 						child: topWidgets(),
 					),

@@ -79,6 +79,7 @@ class HomePageState extends State<HomePage> {
 							tooltip: "Invert",
 							iconSize: 40,
 							onPressed: () {
+								puzzle.numInverts++;
 								puzzle.invertPieces();
 								boardStateGroup.notifyAll();
 								final int holeLocation = puzzle.puzzlePieces.indexOf(null);

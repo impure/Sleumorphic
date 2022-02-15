@@ -54,27 +54,6 @@ class Puzzle {
 		boardStateGroup.notifyAll(null);
 	}
 
-	factory Puzzle.fromMap(Map<dynamic, dynamic> data) {
-
-		return Puzzle._(
-			numMoves: data[Data.NUM_MOVES.index],
-			numInverts: data[Data.NUM_CHECKS.index],
-			puzzlePieces: List<int?>.from(data[Data.PUZZLE_PIECES.index]),
-			isBoosted: (data[Data.MAX_CHECKS_DEPRECATED.index] != null && data[Data.MAX_CHECKS_DEPRECATED.index] >= 6) || data[Data.IS_BOOSTED.index] == true,
-			shareInfo: StringBuffer(data[Data.SHARE_INFO.index]),
-			keyTranslationLayer: TileKeyTranslationLayer(List<int?>.from(data[Data.PUZZLE_PIECES.index])),
-		);
-	}
-
-	Puzzle._({
-		required this.numMoves,
-		required this.numInverts,
-		required this.puzzlePieces,
-		required this.shareInfo,
-		required this.isBoosted,
-		required this.keyTranslationLayer,
-	});
-
 	List<int> backPuzzlePieces = <int>[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ];
 	List<int?> puzzlePieces = <int?>[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, null ];
 	int numMoves = 0;
@@ -162,7 +141,6 @@ class Puzzle {
 	}
 
 	void invertPieces() {
-		numInverts++;
 		statDisplayStateGroup.notifyAll();
 		for (int i = 0; i < puzzlePieces.length; i++) {
 			if (puzzlePieces[i] != null) {

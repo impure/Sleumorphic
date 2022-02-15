@@ -76,6 +76,7 @@ class BoardDisplayState extends SyncState<void, BoardDisplay> {
 					return;
 				}
 				if (key.isKeyPressed(LogicalKeyboardKey.controlLeft) || key.isKeyPressed(LogicalKeyboardKey.controlRight)) {
+					puzzle.numInverts++;
 					puzzle.invertPieces();
 					boardStateGroup.notifyAll();
 					final int holeLocation = puzzle.puzzlePieces.indexOf(null);

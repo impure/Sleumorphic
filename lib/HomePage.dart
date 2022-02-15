@@ -4,9 +4,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:sleumorphic/Dialogs/InstructionsDialog.dart';
+import 'package:sleumorphic/Data/Data.dart';
 import 'package:sleumorphic/Dialogs/SettingsDialog.dart';
+import 'package:sleumorphic/Logic/Puzzle.dart';
 import 'package:sleumorphic/Widgets/BoardDisplay.dart';
+import 'package:sleumorphic/Widgets/NeumorphicTile.dart';
 import 'package:tools/BasicExtensions.dart';
 import 'package:tools/Startup.dart';
 
@@ -26,15 +28,6 @@ class HomePageState extends State<HomePage> {
 			DeviceOrientation.portraitUp,
 			DeviceOrientation.portraitDown,
 		]);
-
-
-		WidgetsBinding.instance!.addPostFrameCallback((_) {
-			if (!prefs!.containsKey("DisplayHelp")) {
-				displayHelp();
-				prefs!.setBool("DisplayHelp", true);
-			}
-		});
-		WidgetsBinding.instance!.scheduleFrame();
 
 		final bool darkModeEnabled = Theme.of(context).darkModeEnabled;
 
@@ -66,7 +59,7 @@ class HomePageState extends State<HomePage> {
 						fontSize: 50,
 					),
 					style: NeumorphicStyle(
-						color: darkModeEnabled ? null : const Color.fromRGBO(50, 50, 50, 1),
+						color: darkModeEnabled ? null : const Color.fromRGBO(75, 75, 75, 1),
 						shape: NeumorphicShape.convex,
 						lightSource: LightSource.topLeft,
 						shadowDarkColor: darkModeEnabled ? Colors.black : Colors.black54,
@@ -80,7 +73,7 @@ class HomePageState extends State<HomePage> {
 						fontSize: 20,
 					),
 					style: NeumorphicStyle(
-						color: darkModeEnabled ? null : const Color.fromRGBO(50, 50, 50, 1),
+						color: darkModeEnabled ? null : const Color.fromRGBO(75, 75, 75, 1),
 						shape: NeumorphicShape.convex,
 						lightSource: LightSource.topLeft,
 						shadowDarkColor: darkModeEnabled ? Colors.black : Colors.black54,
@@ -105,7 +98,7 @@ class HomePageState extends State<HomePage> {
 								Icons.settings,
 								size: 60,
 								style: NeumorphicStyle(
-									color: darkModeEnabled ? null : const Color.fromRGBO(50, 50, 50, 1),
+									color: darkModeEnabled ? null : const Color.fromRGBO(75, 75, 75, 1),
 									shape: NeumorphicShape.convex,
 									lightSource: LightSource.topLeft,
 									shadowDarkColor: darkModeEnabled ? Colors.black : Colors.black54,
@@ -115,12 +108,17 @@ class HomePageState extends State<HomePage> {
 						),
 						const SizedBox(width: 20),
 						GestureDetector(
-							onTap: displayHelp,
+							onTap: () {
+								puzzle.invertPieces();
+								boardStateGroup.notifyAll();
+								final int holeLocation = puzzle.puzzlePieces.indexOf(null);
+								neumorphicTiles.notifyAll(Offset((holeLocation % PUZZLE_WIDTH).toDouble(), (holeLocation ~/ PUZZLE_WIDTH).toDouble()));
+							},
 							child: NeumorphicIcon(
-								Icons.info_outline,
+								Icons.flip_camera_android, // Icons.flip_to_front
 								size: 60,
 								style: NeumorphicStyle(
-									color: darkModeEnabled ? null : const Color.fromRGBO(50, 50, 50, 1),
+									color: darkModeEnabled ? null : const Color.fromRGBO(75, 75, 75, 1),
 									shape: NeumorphicShape.convex,
 									lightSource: LightSource.topLeft,
 									shadowDarkColor: darkModeEnabled ? Colors.black : Colors.black54,
@@ -215,14 +213,5 @@ class HomePageState extends State<HomePage> {
 				],
 			),
 		);*/
-	}
-
-	void displayHelp() {
-		showDialog(
-			context: context,
-			builder: (BuildContext context) {
-				return const InstructionsDialog();
-			}
-		);
 	}
 }

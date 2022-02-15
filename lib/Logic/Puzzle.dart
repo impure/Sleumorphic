@@ -17,8 +17,8 @@ enum DIRECTION_HINT {
 	BOTH,
 }
 
-const int PUZZLE_WIDTH = 3;
-const int PUZZLE_HEIGHT = 3;
+int PUZZLE_WIDTH = 3;
+int PUZZLE_HEIGHT = 3;
 
 class Puzzle {
 

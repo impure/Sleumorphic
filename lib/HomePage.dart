@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:sleumorphic/Dialogs/InstructionsDialog.dart';
+import 'package:sleumorphic/Dialogs/SettingsDialog.dart';
 import 'package:sleumorphic/Widgets/BoardDisplay.dart';
 import 'package:tools/BasicExtensions.dart';
 import 'package:tools/Startup.dart';
@@ -70,7 +71,9 @@ class HomePageState extends State<HomePage> {
 						shadowDarkColor: darkModeEnabled ? Colors.black : Colors.black54,
 						shadowLightColor: darkModeEnabled ? Colors.white70 : Colors.white,
 					),
-				),NeumorphicText(
+				),
+				const SizedBox(height: 20),
+				NeumorphicText(
 					"Moves: ?? - Inversions: ??",
 					textStyle: NeumorphicTextStyle(
 						fontSize: 20,
@@ -82,12 +85,36 @@ class HomePageState extends State<HomePage> {
 						shadowLightColor: darkModeEnabled ? Colors.white70 : Colors.white,
 					),
 				),
+				const SizedBox(height: 20),
 				BoardDisplay(gridSize),
+				const SizedBox(height: 20),
 				Row(
 					children: <Widget>[
 						GestureDetector(
+							onTap: () {
+								showDialog(
+									context: context,
+									builder: (_) {
+										return const SettingsDialog();
+									}
+								);
+							},
 							child: NeumorphicIcon(
 								Icons.settings,
+								size: 60,
+								style: NeumorphicStyle(
+									shape: NeumorphicShape.convex,
+									lightSource: LightSource.topLeft,
+									shadowDarkColor: darkModeEnabled ? Colors.black : Colors.black54,
+									shadowLightColor: darkModeEnabled ? Colors.white70 : Colors.white,
+								),
+							),
+						),
+						const SizedBox(width: 20),
+						GestureDetector(
+							onTap: displayHelp,
+							child: NeumorphicIcon(
+								Icons.info_outline,
 								size: 60,
 								style: NeumorphicStyle(
 									shape: NeumorphicShape.convex,

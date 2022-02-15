@@ -36,7 +36,7 @@ class InstructionsDialogState extends State<InstructionsDialog> {
 		);
 		spans.add(
 			const TextSpan(
-				text: "\n\nAnd if you don't know how to solve a slide puzzle "),
+				text: "And if you don't know how to solve a slide puzzle "),
 		);
 		spans.add(
 			TextSpan(

@@ -59,7 +59,7 @@ class HomePageState extends State<HomePage> {
 				const SizedBox(height: 5),
 				const Text(
 					"#FlutterPuzzleHack",
-					style: TextStyle(fontSize: 45),
+					style: TextStyle(fontSize: 45, fontWeight: FontWeight.w700),
 				),
 				const SizedBox(height: 10),
 				const StatsDisplay(),

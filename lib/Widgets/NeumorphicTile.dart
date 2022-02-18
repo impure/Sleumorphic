@@ -117,7 +117,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 											begin: Alignment.topLeft,
 											end: Alignment.bottomRight,
 											colors: <Color>[
-												widget.foreground ? Theme.of(context).canvasColor.brighten(8) : Theme.of(context).canvasColor.darken(2),
+												widget.foreground ? Theme.of(context).canvasColor.brighten(8) : Theme.of(context).canvasColor,
 												Theme.of(context).canvasColor,
 											]
 										)

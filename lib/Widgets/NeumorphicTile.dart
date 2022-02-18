@@ -96,12 +96,16 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 		return AnimatedBuilder(
 			animation: _animation,
 			builder: (_, __) {
+
+				final double currentDepth = widget.foreground ? computeDepth(_animation.value) : -maxDepth;
+				final double multiplier = (currentDepth/maxDepth).abs();
+
 				return Stack(
 					children: <Widget>[
 						Neumorphic(
 							style: NeumorphicStyle(
 								boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(max(widget.width, widget.height) * 0.1)),
-								depth: widget.foreground ? computeDepth(_animation.value) : -maxDepth,
+								depth: currentDepth,
 								lightSource: LightSource.topLeft,
 								color: themeData.canvasColor,
 								shadowDarkColor: themeData.darkModeEnabled ? Colors.black : Colors.black54,
@@ -117,8 +121,8 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 											begin: Alignment.topLeft,
 											end: Alignment.bottomRight,
 											colors: <Color>[
-												widget.foreground ? Theme.of(context).canvasColor.brighten(8) : Theme.of(context).canvasColor,
-												Theme.of(context).canvasColor,
+												widget.foreground ? themeData.canvasColor.brighten((8 * multiplier).round()) : themeData.canvasColor,
+												themeData.canvasColor,
 											]
 										)
 									),

@@ -98,7 +98,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 			builder: (_, __) {
 
 				final double currentDepth = widget.foreground ? computeDepth(_animation.value) : -maxDepth;
-				final double multiplier = (currentDepth/maxDepth).abs();
+				final num multiplier = pow(max(currentDepth/maxDepth, 0), 0.25);
 
 				return Stack(
 					children: <Widget>[

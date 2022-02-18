@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -90,6 +91,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 	Widget build(BuildContext context) {
 
 		final ThemeData themeData = Theme.of(context);
+		Paint.enableDithering = true;
 
 		return AnimatedBuilder(
 			animation: _animation,
@@ -98,7 +100,6 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 					children: <Widget>[
 						Neumorphic(
 							style: NeumorphicStyle(
-								shape: NeumorphicShape.convex,
 								boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(max(widget.width, widget.height) * 0.1)),
 								depth: widget.foreground ? computeDepth(_animation.value) : -maxDepth,
 								lightSource: LightSource.topLeft,
@@ -108,9 +109,19 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 							),
 							child: GestureDetector(
 								behavior: HitTestBehavior.translucent,
-								child: SizedBox(
+								child: Container(
 									height: widget.height,
 									width: widget.width,
+									decoration: BoxDecoration(
+										gradient: LinearGradient(
+											begin: Alignment.topLeft,
+											end: Alignment.bottomRight,
+											colors: <Color>[
+												widget.foreground ? Theme.of(context).canvasColor.brighten(8) : Theme.of(context).canvasColor.darken(2),
+												Theme.of(context).canvasColor,
+											]
+										)
+									),
 								),
 								onTap: () {
 									if (!widget.foreground) {
@@ -123,10 +134,10 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 									}
 									if (puzzle.solved) {
 										showDialog(
-												context: context,
-												builder: (_) {
-													return const StatsDialog();
-												}
+											context: context,
+											builder: (_) {
+												return const StatsDialog();
+											}
 										);
 										return;
 									}
@@ -150,7 +161,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 											),
 										),
 									),
-								)
+								),
 							),
 						),
 					],

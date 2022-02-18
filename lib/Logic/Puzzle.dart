@@ -134,6 +134,10 @@ class Puzzle {
 				} else {
 					counter = puzzlePieces[i]!;
 				}
+			} else {
+				if (i != puzzlePieces.length - 1) {
+					return false;
+				}
 			}
 		}
 		counter = 0;
@@ -143,6 +147,10 @@ class Puzzle {
 					return false;
 				} else {
 					counter = backPuzzlePieces[i];
+				}
+			} else {
+				if (i != backPuzzlePieces.length - 1) {
+					return false;
 				}
 			}
 		}

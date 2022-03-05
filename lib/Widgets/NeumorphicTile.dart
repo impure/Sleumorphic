@@ -91,12 +91,12 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 	Widget build(BuildContext context) {
 
 		final ThemeData themeData = Theme.of(context);
-		Paint.enableDithering = true;
 
 		return AnimatedBuilder(
 			animation: _animation,
 			builder: (_, __) {
 
+				Paint.enableDithering = true;
 				final double currentDepth = widget.foreground ? computeDepth(_animation.value) : -maxDepth;
 				final num multiplier = pow(max(currentDepth/maxDepth, 0), 0.25);
 

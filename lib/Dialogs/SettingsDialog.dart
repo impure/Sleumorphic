@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:sleumorphic/Data/Data.dart';
 import 'package:sleumorphic/Logic/Puzzle.dart';
+import 'package:sleumorphic/Widgets/NeumorphicTile.dart';
 import 'package:tools/Startup.dart';
 import 'package:tuple/tuple.dart';
 
@@ -71,6 +72,7 @@ class SettingsDialogState extends State<SettingsDialog> {
 								puzzle = Puzzle();
 								statDisplayStateGroup.notifyAll();
 								boardStateGroup.notifyAll();
+								neumorphicTiles.notifyAll();
 								bottomButtonStateGroup.notifyAll();
 								setState(() {});
 							},

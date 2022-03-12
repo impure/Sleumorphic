@@ -54,7 +54,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 	@override
 	void update(Offset? offset) {
 		if (offset == null) {
-			displayNum = widget.num;
+			displayNum = puzzle.puzzlePieces[widget.offset.dx.toInt() + widget.offset.dy.toInt()] ?? puzzle.backPuzzlePieces[widget.offset.dx.toInt() + widget.offset.dy.toInt()];
 			super.update(null);
 			return;
 		}

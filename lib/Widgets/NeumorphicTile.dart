@@ -75,7 +75,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with TickerP
 		_initController = AnimationController(vsync: this, duration: const Duration(milliseconds: 2000));
 		_initController.value = 0;
 		_initAnimation = Tween<double>(begin: 0, end: 1)
-				.animate(CurvedAnimation(parent: _initController, curve: const Interval(0.25, 1, curve: Curves.easeInOutCubic)));
+				.animate(CurvedAnimation(parent: _initController, curve: const Interval(0.5, 1, curve: Curves.easeInOutCubic)));
 
 		_flipController = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
 		_flipController.value = 0;
@@ -111,7 +111,8 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with TickerP
 	Widget build(BuildContext context) {
 
 		if (puzzle == null || puzzle != previousPuzzle) {
-			_initController.forward(from: 0);
+			previousPuzzle = puzzle;
+			_initController.forward(from: Random().nextDouble() * 0.3);
 		}
 
 		final ThemeData themeData = Theme.of(context);

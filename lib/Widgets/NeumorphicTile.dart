@@ -111,7 +111,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with TickerP
 	Widget build(BuildContext context) {
 
 		if (puzzle == null || puzzle != previousPuzzle) {
-			_initController.forward();
+			_initController.forward(from: 0);
 		}
 
 		final ThemeData themeData = Theme.of(context);

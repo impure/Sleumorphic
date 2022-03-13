@@ -38,22 +38,6 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with TickerP
 	double? _prevAnimationValue;
 	late int displayNum;
 
-	/*
-	Offset? oldOffset;
-	DIRECTION_HINT? hintInfo;
-
-	@override
-	void didUpdateWidget(Tile oldWidget) {
-
-		if (oldWidget.offset != widget.offset) {
-			oldOffset = oldWidget.offset;
-			_controller.forward(from: 0);
-		}
-
-		super.didUpdateWidget(oldWidget);
-	}
-	*/
-
 	@override
 	void update(Offset? offset) {
 		if (offset == null) {
@@ -145,14 +129,14 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with TickerP
 											height: widget.height,
 											width: widget.width,
 											decoration: BoxDecoration(
-													gradient: LinearGradient(
-															begin: Alignment.topLeft,
-															end: Alignment.bottomRight,
-															colors: <Color>[
-																widget.foreground ? themeData.canvasColor.brighten((8 * multiplier).round()) : themeData.canvasColor,
-																themeData.canvasColor,
-															]
-													)
+												gradient: LinearGradient(
+													begin: Alignment.topLeft,
+													end: Alignment.bottomRight,
+													colors: <Color>[
+														widget.foreground ? themeData.canvasColor.brighten((8 * multiplier).round()) : themeData.canvasColor,
+														themeData.canvasColor,
+													]
+												),
 											),
 										),
 										onTap: () {
@@ -166,10 +150,10 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with TickerP
 											}
 											if (puzzle.solved) {
 												showDialog(
-														context: context,
-														builder: (_) {
-															return const StatsDialog();
-														}
+													context: context,
+													builder: (_) {
+														return const StatsDialog();
+													}
 												);
 												return;
 											}

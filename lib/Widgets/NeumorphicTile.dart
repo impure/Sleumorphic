@@ -30,8 +30,10 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 
 	NeumorphicTileState() : super(neumorphicTiles);
 
-	late AnimationController _controller;
-	late Animation<double> _animation;
+	late AnimationController _flipController;
+	late AnimationController _initController;
+	late Animation<double> _flipAnimation;
+	late Animation<double> _initAnimation;
 	double? _prevAnimationValue;
 	late int displayNum;
 
@@ -63,20 +65,20 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 			return;
 		}
 		Future<void>.delayed(Duration(milliseconds: (75 * ((widget.offset - offset).distance - 1)).round())).then((_) {
-			_controller.forward(from: 0);
+			_flipController.forward(from: 0);
 		});
 	}
 
 	@override
 	void initState() {
-		_controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
-		_controller.value = 0;
-		_animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: _controller, curve: Curves.linear));
-		_animation.addListener(() {
-			if (_prevAnimationValue != null && _prevAnimationValue! < 0.25 && _animation.value >= 0.25) {
+		_flipController = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
+		_flipController.value = 0;
+		_flipAnimation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: _flipController, curve: Curves.linear));
+		_flipAnimation.addListener(() {
+			if (_prevAnimationValue != null && _prevAnimationValue! < 0.25 && _flipAnimation.value >= 0.25) {
 				displayNum = widget.num;
 			}
-			_prevAnimationValue = _animation.value;
+			_prevAnimationValue = _flipAnimation.value;
 		});
 		displayNum = widget.num;
 		super.initState();
@@ -84,7 +86,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 
 	@override
 	void dispose() {
-		_controller.dispose();
+		_flipController.dispose();
 		super.dispose();
 	}
 	
@@ -102,11 +104,11 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 		final ThemeData themeData = Theme.of(context);
 
 		return AnimatedBuilder(
-			animation: _animation,
+			animation: _flipAnimation,
 			builder: (_, __) {
 
 				Paint.enableDithering = true;
-				final double currentDepth = widget.foreground ? computeDepth(_animation.value) : -maxDepth;
+				final double currentDepth = widget.foreground ? computeDepth(_flipAnimation.value) : -maxDepth;
 				final num multiplier = pow(max(currentDepth/maxDepth, 0), 0.25);
 
 				return Stack(

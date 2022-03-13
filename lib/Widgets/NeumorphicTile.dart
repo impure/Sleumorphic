@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:sleumorphic/Data/Data.dart';
 import 'package:sleumorphic/Dialogs/StatsDialog.dart';
+import 'package:sleumorphic/Logic/Puzzle.dart';
 import 'package:state_groups/state_groups.dart';
 import 'package:tools/BasicExtensions.dart';
 
@@ -26,7 +27,7 @@ class NeumorphicTile extends StatefulWidget {
 	NeumorphicTileState createState() => NeumorphicTileState();
 }
 
-class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleTickerProviderStateMixin {
+class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with TickerProviderStateMixin {
 
 	NeumorphicTileState() : super(neumorphicTiles);
 
@@ -71,6 +72,11 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 
 	@override
 	void initState() {
+		_initController = AnimationController(vsync: this, duration: const Duration(milliseconds: 2000));
+		_initController.value = 0;
+		_initAnimation = Tween<double>(begin: 0, end: 1)
+				.animate(CurvedAnimation(parent: _initController, curve: const Interval(0.25, 1, curve: Curves.easeInOutCubic)));
+
 		_flipController = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
 		_flipController.value = 0;
 		_flipAnimation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: _flipController, curve: Curves.linear));
@@ -87,6 +93,7 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 	@override
 	void dispose() {
 		_flipController.dispose();
+		_initController.dispose();
 		super.dispose();
 	}
 	
@@ -98,157 +105,101 @@ class NeumorphicTileState extends SyncState<Offset, NeumorphicTile> with SingleT
 		return max(widget.width, widget.width) * 0.05;
 	}
 
+	Puzzle? previousPuzzle;
+
 	@override
 	Widget build(BuildContext context) {
+
+		if (puzzle == null || puzzle != previousPuzzle) {
+			_initController.forward();
+		}
 
 		final ThemeData themeData = Theme.of(context);
 
 		return AnimatedBuilder(
-			animation: _flipAnimation,
+			animation: _initController,
 			builder: (_, __) {
+				return AnimatedBuilder(
+					animation: _flipAnimation,
+					builder: (_, __) {
 
-				Paint.enableDithering = true;
-				final double currentDepth = widget.foreground ? computeDepth(_flipAnimation.value) : -maxDepth;
-				final num multiplier = pow(max(currentDepth/maxDepth, 0), 0.25);
+						Paint.enableDithering = true;
+						final double currentDepth = _initAnimation.value * (widget.foreground ? computeDepth(_flipAnimation.value) : -maxDepth);
+						final num multiplier = _initAnimation.value * pow(max(currentDepth/maxDepth, 0), 0.25);
 
-				return Stack(
-					children: <Widget>[
-						Neumorphic(
-							style: NeumorphicStyle(
-								boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(max(widget.width, widget.height) * 0.1)),
-								depth: currentDepth,
-								lightSource: LightSource.topLeft,
-								color: themeData.canvasColor,
-								shadowDarkColor: themeData.darkModeEnabled ? Colors.black : Colors.black54,
-								shadowLightColor: themeData.darkModeEnabled ? Colors.white70 : Colors.white.withOpacity(0.9),
-							),
-							child: GestureDetector(
-								behavior: HitTestBehavior.translucent,
-								child: Container(
-									height: widget.height,
-									width: widget.width,
-									decoration: BoxDecoration(
-										gradient: LinearGradient(
-											begin: Alignment.topLeft,
-											end: Alignment.bottomRight,
-											colors: <Color>[
-												widget.foreground ? themeData.canvasColor.brighten((8 * multiplier).round()) : themeData.canvasColor,
-												themeData.canvasColor,
-											]
-										)
+						return Stack(
+							children: <Widget>[
+								Neumorphic(
+									style: NeumorphicStyle(
+										boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(max(widget.width, widget.height) * 0.1)),
+										depth: currentDepth,
+										lightSource: LightSource.topLeft,
+										color: themeData.canvasColor,
+										shadowDarkColor: themeData.darkModeEnabled ? Colors.black : Colors.black54,
+										shadowLightColor: themeData.darkModeEnabled ? Colors.white70 : Colors.white.withOpacity(0.9),
 									),
-								),
-								onTap: () {
-									if (!widget.foreground) {
-										puzzle.numInverts++;
-										puzzle.invertPieces();
-										boardStateGroup.notifyAll();
-										neumorphicTiles.notifyAll(widget.offset);
-										puzzle.checkWin(context);
-										return;
-									}
-									if (puzzle.solved) {
-										showDialog(
-											context: context,
-											builder: (_) {
-												return const StatsDialog();
-											}
-										);
-										return;
-									}
-									puzzle.trySwapHoleWith(widget.key);
-									puzzle.checkWin(context);
-								},
-							),
-						),
-						IgnorePointer(
-							child: SizedBox(
-								height: widget.height,
-								width: widget.width,
-								child: Padding(
-									padding: EdgeInsets.symmetric(vertical: widget.height * 0.2),
-									child: Center(
-										child: AutoSizeText(
-											displayNum.toString(),
-											style: const TextStyle(
-												fontSize: 50,
-												fontWeight: FontWeight.w700,
+									child: GestureDetector(
+										behavior: HitTestBehavior.translucent,
+										child: Container(
+											height: widget.height,
+											width: widget.width,
+											decoration: BoxDecoration(
+													gradient: LinearGradient(
+															begin: Alignment.topLeft,
+															end: Alignment.bottomRight,
+															colors: <Color>[
+																widget.foreground ? themeData.canvasColor.brighten((8 * multiplier).round()) : themeData.canvasColor,
+																themeData.canvasColor,
+															]
+													)
 											),
 										),
+										onTap: () {
+											if (!widget.foreground) {
+												puzzle.numInverts++;
+												puzzle.invertPieces();
+												boardStateGroup.notifyAll();
+												neumorphicTiles.notifyAll(widget.offset);
+												puzzle.checkWin(context);
+												return;
+											}
+											if (puzzle.solved) {
+												showDialog(
+														context: context,
+														builder: (_) {
+															return const StatsDialog();
+														}
+												);
+												return;
+											}
+											puzzle.trySwapHoleWith(widget.key);
+											puzzle.checkWin(context);
+										},
 									),
 								),
-							),
-						),
-					],
-				);
-			},
-		);
-		/*
-		return AnimatedBuilder(
-			animation: _controller,
-			builder: (_, __) {
-				return Transform.translate(
-					offset: oldOffset == null ? widget.offset : Offset.lerp(oldOffset, widget.offset, _animation.value)!,
-					child: SizedBox(
-						height: widget.height,
-						width: widget.width,
-						child: Neumorphic(
-							style: NeumorphicStyle(
-								shape: NeumorphicShape.convex,
-								boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
-								depth: widget.foreground ? 5 : -5,
-								lightSource: LightSource.topLeft,
-								color: themeData.canvasColor,
-								shadowDarkColor: themeData.darkModeEnabled ? Colors.black : Colors.black54,
-								shadowLightColor: themeData.darkModeEnabled ? Colors.white70 : Colors.white,
-							),
-							child: GestureDetector(
-								behavior: HitTestBehavior.translucent,
-								child: SizedBox(
-									height: widget.height,
-									width: widget.width,
-									child: Center(
+								IgnorePointer(
+									child: SizedBox(
+										height: widget.height,
+										width: widget.width,
 										child: Padding(
-											padding: EdgeInsets.symmetric(vertical: widget.width * 0.2, horizontal: widget.height * 0.2),
-											child: AutoSizeText(
-												widget.num.toString(),
-												style: const TextStyle(
-													//color: Colors.white,
-													fontSize: 50,
-													fontWeight: FontWeight.w900,
-													//shadows: <Shadow>[
-													//	Shadow(
-													//		color: shadowColour,
-													//		blurRadius: 10,
-													//	),
-													//],
+											padding: EdgeInsets.symmetric(vertical: widget.height * 0.2),
+											child: Center(
+												child: AutoSizeText(
+													displayNum.toString(),
+													style: const TextStyle(
+														fontSize: 50,
+														fontWeight: FontWeight.w700,
+													),
 												),
 											),
 										),
 									),
 								),
-								onTap: () {
-									if (!widget.foreground) {
-										return;
-									}
-									if (puzzle.solved) {
-										showDialog(
-											context: context,
-											builder: (_) {
-												return const StatsDialog();
-											}
-										);
-										return;
-									}
-									puzzle.trySwapHoleWith(widget.num);
-									puzzle.checkWin(context);
-								},
-							),
-						),
-					),
+							],
+						);
+					},
 				);
-			}
+			},
 		);
-		*/
 	}
 }

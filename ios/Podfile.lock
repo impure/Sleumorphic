@@ -1,9 +1,9 @@
 PODS:
-  - connectivity_plus_macos (0.0.1):
-    - FlutterMacOS
+  - connectivity_plus (0.0.1):
+    - Flutter
     - ReachabilitySwift
-  - device_info_plus_macos (0.0.1):
-    - FlutterMacOS
+  - device_info_plus (0.0.1):
+    - Flutter
   - Firebase/Analytics (8.11.0):
     - Firebase/Core
   - Firebase/Core (8.11.0):
@@ -14,10 +14,10 @@ PODS:
   - firebase_analytics (9.1.2):
     - Firebase/Analytics (= 8.11.0)
     - firebase_core
-    - FlutterMacOS
+    - Flutter
   - firebase_core (1.13.1):
-    - Firebase/CoreOnly (~> 8.11.0)
-    - FlutterMacOS
+    - Firebase/CoreOnly (= 8.11.0)
+    - Flutter
   - FirebaseAnalytics (8.11.0):
     - FirebaseAnalytics/AdIdSupport (= 8.11.0)
     - FirebaseCore (~> 8.0)
@@ -50,7 +50,10 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - GoogleUtilities/UserDefaults (~> 7.7)
     - PromisesObjC (< 3.0, >= 1.2)
-  - FlutterMacOS (1.0.0)
+  - Flutter (1.0.0)
+  - fluttertoast (0.0.2):
+    - Flutter
+    - Toast
   - GoogleAppMeasurement (8.11.0):
     - GoogleAppMeasurement/AdIdSupport (= 8.11.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
@@ -94,32 +97,40 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.7.0):
     - GoogleUtilities/Logger
+  - in_app_purchase_storekit (0.0.1):
+    - Flutter
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
-  - package_info_plus_macos (0.0.1):
-    - FlutterMacOS
-  - path_provider_macos (0.0.1):
-    - FlutterMacOS
+  - package_info_plus (0.4.5):
+    - Flutter
+  - path_provider_ios (0.0.1):
+    - Flutter
   - PromisesObjC (2.0.0)
   - ReachabilitySwift (5.0.0)
-  - shared_preferences_macos (0.0.1):
-    - FlutterMacOS
-  - url_launcher_macos (0.0.1):
-    - FlutterMacOS
+  - shared_preferences_ios (0.0.1):
+    - Flutter
+  - social_share (0.0.1):
+    - Flutter
+  - Toast (4.0.0)
+  - url_launcher_ios (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
-  - connectivity_plus_macos (from `Flutter/ephemeral/.symlinks/plugins/connectivity_plus_macos/macos`)
-  - device_info_plus_macos (from `Flutter/ephemeral/.symlinks/plugins/device_info_plus_macos/macos`)
-  - firebase_analytics (from `Flutter/ephemeral/.symlinks/plugins/firebase_analytics/macos`)
-  - firebase_core (from `Flutter/ephemeral/.symlinks/plugins/firebase_core/macos`)
-  - FlutterMacOS (from `Flutter/ephemeral`)
-  - package_info_plus_macos (from `Flutter/ephemeral/.symlinks/plugins/package_info_plus_macos/macos`)
-  - path_provider_macos (from `Flutter/ephemeral/.symlinks/plugins/path_provider_macos/macos`)
-  - shared_preferences_macos (from `Flutter/ephemeral/.symlinks/plugins/shared_preferences_macos/macos`)
-  - url_launcher_macos (from `Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/macos`)
+  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
+  - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
+  - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
+  - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
+  - Flutter (from `Flutter`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - in_app_purchase_storekit (from `.symlinks/plugins/in_app_purchase_storekit/ios`)
+  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
+  - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
+  - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
+  - social_share (from `.symlinks/plugins/social_share/ios`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 SPEC REPOS:
   trunk:
@@ -134,49 +145,60 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - ReachabilitySwift
+    - Toast
 
 EXTERNAL SOURCES:
-  connectivity_plus_macos:
-    :path: Flutter/ephemeral/.symlinks/plugins/connectivity_plus_macos/macos
-  device_info_plus_macos:
-    :path: Flutter/ephemeral/.symlinks/plugins/device_info_plus_macos/macos
+  connectivity_plus:
+    :path: ".symlinks/plugins/connectivity_plus/ios"
+  device_info_plus:
+    :path: ".symlinks/plugins/device_info_plus/ios"
   firebase_analytics:
-    :path: Flutter/ephemeral/.symlinks/plugins/firebase_analytics/macos
+    :path: ".symlinks/plugins/firebase_analytics/ios"
   firebase_core:
-    :path: Flutter/ephemeral/.symlinks/plugins/firebase_core/macos
-  FlutterMacOS:
-    :path: Flutter/ephemeral
-  package_info_plus_macos:
-    :path: Flutter/ephemeral/.symlinks/plugins/package_info_plus_macos/macos
-  path_provider_macos:
-    :path: Flutter/ephemeral/.symlinks/plugins/path_provider_macos/macos
-  shared_preferences_macos:
-    :path: Flutter/ephemeral/.symlinks/plugins/shared_preferences_macos/macos
-  url_launcher_macos:
-    :path: Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/macos
+    :path: ".symlinks/plugins/firebase_core/ios"
+  Flutter:
+    :path: Flutter
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
+  in_app_purchase_storekit:
+    :path: ".symlinks/plugins/in_app_purchase_storekit/ios"
+  package_info_plus:
+    :path: ".symlinks/plugins/package_info_plus/ios"
+  path_provider_ios:
+    :path: ".symlinks/plugins/path_provider_ios/ios"
+  shared_preferences_ios:
+    :path: ".symlinks/plugins/shared_preferences_ios/ios"
+  social_share:
+    :path: ".symlinks/plugins/social_share/ios"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
-  connectivity_plus_macos: f6e86fd000e971d361e54b5afcadc8c8fa773308
-  device_info_plus_macos: 1ad388a1ef433505c4038e7dd9605aadd1e2e9c7
+  connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
+  device_info_plus: e5c5da33f982a436e103237c0c85f9031142abed
   Firebase: 44dd9724c84df18b486639e874f31436eaa9a20c
-  firebase_analytics: fc6267f19d21b2fc95e5446bbeec303c2e709eb9
-  firebase_core: 11d0b4e9fa6120706c015fbfe5f4b409758dae5d
+  firebase_analytics: 20841ef6a705a412c737deb2fe98290e9242d323
+  firebase_core: 08f6a85f62060111de5e98d6a214810d11365de9
   FirebaseAnalytics: 4e4b13031034e6561ed3bd1d47b6fdabbd6487c6
   FirebaseCore: 2f4f85b453cc8fea4bb2b37e370007d2bcafe3f0
   FirebaseCoreDiagnostics: 3b40dfadef5b90433a60ae01f01e90fe87aa76aa
   FirebaseInstallations: 25764cf322e77f99449395870a65b2bef88e1545
-  FlutterMacOS: 57701585bf7de1b3fc2bb61f6378d73bbdea8424
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  fluttertoast: 16fbe6039d06a763f3533670197d01fc73459037
   GoogleAppMeasurement: aa3cb422fab2b05d2efac543a5720d1a85b9dea5
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
+  in_app_purchase_storekit: 6dec89fe3b9698847ed4aaf65fde6c17491620ad
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
-  package_info_plus_macos: f010621b07802a241d96d01876d6705f15e77c1c
-  path_provider_macos: 160cab0d5461f0c0e02995469a98f24bdb9a3f1f
+  package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
+  path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
-  shared_preferences_macos: a64dc611287ed6cbe28fd1297898db1336975727
-  url_launcher_macos: 597e05b8e514239626bcf4a850fcf9ef5c856ec3
+  shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
+  social_share: 702a5e3842addd22db515aa9e1e00a4b80a0296d
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+  url_launcher_ios: 839c58cdb4279282219f5e248c3321761ff3c4de
 
-PODFILE CHECKSUM: 0d3963a09fc94f580682bd88480486da345dc3f0
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
 COCOAPODS: 1.11.2
